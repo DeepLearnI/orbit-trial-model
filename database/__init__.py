@@ -1,7 +1,6 @@
 import os
 from google.cloud import storage
 import pandas as pd
-from constants import test_mode
 
 def download_blob(bucket_name, source_blob_name, destination_file_name):
     """Downloads a blob from the bucket."""
@@ -22,15 +21,13 @@ def upload_blob(bucket_name, source_file_name, destination_blob_name):
 def load(key):
     filename = "{}.csv".format(key)
     filepath = os.path.join("data", filename)
-    if not test_mode:
-        download_blob('orbit-trial', filename, filepath)
+    download_blob('orbit-trial', filename, filepath)
     df = pd.read_csv(filepath)
     df['date'] = pd.to_datetime(df['date'])
     return df
 
 def save(key, df):
-    filename = "{}.csv".format(key)
-    filepath = os.path.join("data", filename)
-    df.to_csv(filepath, index=False)
-    if not test_mode:
-        upload_blob('orbit-trial', filepath, filename)
+    file_name = "{}.csv".format(key)
+    file_path = os.path.join("data", file_name)
+    df.to_csv(file_path, index=False)
+    upload_blob('orbit-trial', file_path, file_name)

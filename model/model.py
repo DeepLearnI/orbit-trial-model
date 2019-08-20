@@ -2,17 +2,17 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, roc_auc_score
 import database as db
 import pickle
+import constants
 # import foundations
 
-def train(start_date, end_date):
+def train(start_date, end_date, username):
     '''
     :param start_date: pandas date
     :param end_date: pandas date
-    :return:
     '''
     # load train data
     end_date_without_time = end_date.date()
-    train_df = db.load(f'labelled-{end_date_without_time}')
+    train_df = db.load(f'{username}-labelled-{end_date_without_time}')
     train_df = train_df[train_df.date >= start_date]
 
     # split features from target
@@ -29,10 +29,10 @@ def train(start_date, end_date):
     pickle.dump(model, open("model_package/model.pkl", "wb"))
 
 
-def predict(inference_date):
+def predict(inference_date, username):
     # load inference data
     inference_date_without_time = inference_date.date()
-    inference_df = db.load(f'inference-{inference_date_without_time}')
+    inference_df = db.load(f'{username}-inference-{inference_date_without_time}')
     inference_df = inference_df[inference_df.date == inference_date]
     feature_cols = [col_name for col_name in inference_df.columns if 'feat' in col_name]
     x_train = inference_df[feature_cols].fillna(0)
@@ -47,13 +47,15 @@ def predict(inference_date):
     # return inference results
     inference_df['predicted_churn'] = preds
     inference_df['predicted_churn_probability'] = probs
+
+    # save predictions to data bucket (not necessary if API is exposed and returns preds)
+    db.save(f'predictions-{inference_date_without_time}', inference_df)
     return inference_df
 
-
-def eval(eval_date):
+def eval(eval_date, username):
     # load eval data
     eval_date_without_time = eval_date.date()
-    df = db.load(f'labelled-{eval_date_without_time}')
+    df = db.load(f'{username}-labelled-{eval_date_without_time}')
     df = df[df.date == eval_date]
     # log accuracy and roc_auc
     targets = df["churn"]
@@ -64,12 +66,10 @@ def eval(eval_date):
     roc_auc = roc_auc_score(targets, probs)
 
     # revenue, costs, and profits calc
-    revenue_per_cust = 300
-    cost_per_promo = 1500
     n_promos = preds.sum()
     n_active_custs = len(df[df.churn == 0])
-    revenue = revenue_per_cust * n_active_custs
-    cost = cost_per_promo * n_promos
+    revenue = constants.revenue_per_cust * n_active_custs
+    cost = constants.cost_per_promo * n_promos
     profit = revenue - cost
 
     # foundations logging
