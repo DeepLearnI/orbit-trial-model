@@ -5,14 +5,14 @@ import pickle
 import constants
 # import foundations
 
-def train(start_date, end_date, username):
+def train(start_date, end_date, key):
     '''
     :param start_date: pandas date
     :param end_date: pandas date
     '''
     # load train data
     end_date_without_time = end_date.date()
-    train_df = db.load(f'{username}-labelled-{end_date_without_time}')
+    train_df = db.load(f'{key}-labelled-{end_date_without_time}')
     train_df = train_df[train_df.date >= start_date]
 
     # split features from target
@@ -29,10 +29,10 @@ def train(start_date, end_date, username):
     pickle.dump(model, open("model_package/model.pkl", "wb"))
 
 
-def predict(inference_date, username):
+def predict(inference_date, key):
     # load inference data
     inference_date_without_time = inference_date.date()
-    inference_df = db.load(f'{username}-inference-{inference_date_without_time}')
+    inference_df = db.load(f'{key}-inference-{inference_date_without_time}')
     inference_df = inference_df[inference_df.date == inference_date]
     feature_cols = [col_name for col_name in inference_df.columns if 'feat' in col_name]
     x_train = inference_df[feature_cols].fillna(0)
@@ -52,10 +52,10 @@ def predict(inference_date, username):
     db.save(f'predictions-{inference_date_without_time}', inference_df)
     return inference_df
 
-def eval(eval_date, username):
+def eval(eval_date, key):
     # load eval data
     eval_date_without_time = eval_date.date()
-    df = db.load(f'{username}-labelled-{eval_date_without_time}')
+    df = db.load(f'{key}-labelled-{eval_date_without_time}')
     df = df[df.date == eval_date]
     # log accuracy and roc_auc
     targets = df["churn"]
