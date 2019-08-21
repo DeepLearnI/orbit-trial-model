@@ -3,7 +3,7 @@ from sklearn.metrics import accuracy_score, roc_auc_score
 import database as db
 import pickle
 import constants
-# import foundations
+import foundations
 
 def train(start_date, end_date, key):
     '''
@@ -72,14 +72,15 @@ def eval(eval_date, key):
     cost = constants.cost_per_promo * n_promos
     profit = revenue - cost
 
-    # foundations logging
-    # foundations.log_metric("accuracy", accuracy)
-    # foundations.log_metric("roc_auc", roc_auc)
-    # foundations.log_metric("revenue", revenue)
-    # foundations.log_metric("cost", cost)
-    # foundations.log_metric("profit", profit)
-    # foundations.log_metric("n_promos", n_promos)
-    # foundations.log_metric("n_active_custs", n_active_custs)
+    date_string = str(eval_date)
+    # track metric with foundations-orbit
+    foundations.track_production_metric("accuracy", {date_string: accuracy})
+    foundations.track_production_metric("roc_auc", {date_string: roc_auc})
+    foundations.track_production_metric("revenue", {date_string: revenue})
+    foundations.track_production_metric("cost", {date_string: cost})
+    foundations.track_production_metric("profit", {date_string: profit})
+    foundations.track_production_metric("n_promos", {date_string: n_promos})
+    foundations.track_production_metric("n_active_custs", {date_string: n_active_custs})
 
     return accuracy, roc_auc, revenue, cost, profit, n_promos, n_active_custs
 
