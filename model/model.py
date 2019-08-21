@@ -26,7 +26,7 @@ def train(start_date, end_date, key):
     model.fit(x_train, y_train)
 
     # save model
-    pickle.dump(model, open("model_package/model.pkl", "wb"))
+    pickle.dump(model, open("fitted_objects/model.pkl", "wb"))
 
 
 def predict(inference_date, key):
@@ -38,7 +38,7 @@ def predict(inference_date, key):
     x_train = inference_df[feature_cols].fillna(0)
 
     # load model
-    model = pickle.load(open("model_package/model.pkl", "rb"))
+    model = pickle.load(open("fitted_objects/model.pkl", "rb"))
 
     # run inference
     preds = model.predict(x_train)
