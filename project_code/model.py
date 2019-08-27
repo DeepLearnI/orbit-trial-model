@@ -1,86 +1,93 @@
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, roc_auc_score
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, roc_auc_score, confusion_matrix
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+import pandas as pd
 import database as db
 import pickle
-import constants
+from constants import *
+import numpy as np
 import foundations
 
-def train(start_date, end_date, key):
-    '''
-    :param start_date: pandas date
-    :param end_date: pandas date
-    '''
+def get_dates_in_range(start_date, end_date):
+    assert end_date > start_date
+    assert end_date.day == start_date.day
+    dates = []
+    while end_date != start_date:
+        dates.append(end_date)
+        end_date += relativedelta(months=-1)
+    dates.append(end_date)
+    return dates
+
+
+def train(start_date, end_date, data_key):
+    # get all dates for loading data
+    start_date = datetime.strptime(start_date, "%Y-%m-%d")
+    end_date = datetime.strptime(end_date, "%Y-%m-%d")
+    load_dates = get_dates_in_range(start_date, end_date)
+
     # load train data
-    end_date_without_time = end_date.date()
-    train_df = db.load(f'{key}-labelled-{end_date_without_time}')
-    train_df = train_df[train_df.date >= start_date]
+    train_dfs = []
+    for date in load_dates:
+        date_without_time = date.date()
+        df = db.load(f'{data_key}-labelled-{date_without_time}')
+        train_dfs.append(df)
+    train_df = pd.concat(train_dfs, axis=0)
 
     # split features from target
     y_train = train_df['churn']
-    feature_cols = [col_name for col_name in train_df.columns if 'feat' in col_name]
-    x_train = train_df[feature_cols]
+    x_train = train_df.drop(['cust_id', 'date', 'churn', 'predicted_churn_probability'], axis=1)
     x_train = x_train.fillna(0)
 
     # train model
-    model = LogisticRegression()
+    model =  RandomForestClassifier()
     model.fit(x_train, y_train)
 
     # save model
-    pickle.dump(model, open("fitted_objects/model.pkl", "wb"))
+    pickle.dump(model, open("model_package/model.pkl", "wb"))
 
 
-def predict(inference_date, key):
+def predict(inference_date, data_key):
     # load inference data
-    inference_date_without_time = inference_date.date()
-    inference_df = db.load(f'{key}-inference-{inference_date_without_time}')
-    inference_df = inference_df[inference_df.date == inference_date]
-    feature_cols = [col_name for col_name in inference_df.columns if 'feat' in col_name]
-    x_train = inference_df[feature_cols].fillna(0)
+    inference_df = db.load(f'{data_key}-inference-{inference_date}')
+    # drop non-feature columns
+    x_train = inference_df.drop(['cust_id', 'date'], axis=1)
+    x_train = x_train.fillna(0)
 
     # load model
-    model = pickle.load(open("fitted_objects/model.pkl", "rb"))
+    model = pickle.load(open("model_package/model.pkl", "rb"))
 
     # run inference
-    preds = model.predict(x_train)
-    probs = model.predict_proba(x_train)[:,1]
-
-    # return inference results
-    inference_df['predicted_churn'] = preds
-    inference_df['predicted_churn_probability'] = probs
+    probs = model.predict_proba(x_train)[:, 1]
+    probs_df = pd.DataFrame(probs, columns=["predicted_churn_probability"])
 
     # save predictions to data bucket (not necessary if API is exposed and returns preds)
-    db.save(f'predictions-{inference_date_without_time}', inference_df)
-    return inference_df
+    db.save(f'{data_key}-predictions-{inference_date}', probs_df)
 
-def eval(eval_date, key):
+
+def eval(eval_date, data_key):
     # load eval data
-    eval_date_without_time = eval_date.date()
-    df = db.load(f'{key}-labelled-{eval_date_without_time}')
-    df = df[df.date == eval_date]
+    df = db.load(f'{data_key}-labelled-{eval_date}')
     # log accuracy and roc_auc
     targets = df["churn"]
-    preds = df["predicted_churn"]
     probs = df["predicted_churn_probability"]
-
+    preds = [1 if prob > 0.5 else 0 for prob in probs]
     accuracy = accuracy_score(targets, preds)
     roc_auc = roc_auc_score(targets, probs)
+    confusion_mat = confusion_matrix(targets, preds)
 
     # revenue, costs, and profits calc
-    n_promos = preds.sum()
+    n_promos = np.sum(preds)
     n_active_custs = len(df[df.churn == 0])
-    revenue = constants.revenue_per_cust * n_active_custs
-    cost = constants.cost_per_promo * n_promos
-    profit = revenue - cost
+    revenue = revenue_per_cust * n_active_custs
 
+    # foundations logging
     date_string = str(eval_date)
-    # track metric with foundations-orbit
-    foundations.track_production_metric("accuracy", {date_string: accuracy})
-    foundations.track_production_metric("roc_auc", {date_string: roc_auc})
-    foundations.track_production_metric("revenue", {date_string: revenue})
-    foundations.track_production_metric("cost", {date_string: cost})
-    foundations.track_production_metric("profit", {date_string: profit})
-    foundations.track_production_metric("n_promos", {date_string: n_promos})
-    foundations.track_production_metric("n_active_custs", {date_string: n_active_custs})
+    foundations.track_production_metrics("accuracy", {date_string: accuracy})
+    foundations.track_production_metrics("roc_auc", {date_string: roc_auc})
+    foundations.track_production_metrics("revenue", {date_string: revenue})
+    foundations.track_production_metrics("n_promos", {date_string: n_promos})
+    foundations.track_production_metrics("n_active_custs", {date_string: n_active_custs})
 
-    return accuracy, roc_auc, revenue, cost, profit, n_promos, n_active_custs
+    return preds, confusion_mat, accuracy, roc_auc, n_promos, n_active_custs, revenue
 
