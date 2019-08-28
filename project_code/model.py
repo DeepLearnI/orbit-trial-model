@@ -48,6 +48,7 @@ def train(start_date, end_date, data_key):
 
 
 def predict(inference_date, data_key):
+    inference_date = inference_date.split(' ')[0]
     # load inference data
     inference_df = db.load(f'{data_key}-inference-{inference_date}')
     # drop non-feature columns
@@ -55,7 +56,7 @@ def predict(inference_date, data_key):
     x_train = x_train.fillna(0)
 
     # load model
-    model = pickle.load(open("model_package/model.pkl", "rb"))
+    model = pickle.load(open("fitted_objects/model.pkl", "rb"))
 
     # run inference
     probs = model.predict_proba(x_train)[:, 1]
@@ -66,6 +67,7 @@ def predict(inference_date, data_key):
 
 
 def eval(eval_date, data_key):
+    eval_date = eval_date.split(' ')[0]
     # load eval data
     df = db.load(f'{data_key}-labelled-{eval_date}')
     # log accuracy and roc_auc

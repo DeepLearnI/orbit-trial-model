@@ -3,9 +3,14 @@ from google.cloud import storage
 import pandas as pd
 from constants import bucket_name
 
+def _check_if_dir_exist(folder):
+    import os
+    if not os.path.exists(folder):
+        os.makedirs(folder)
 
 def download_blob(bucket_name, source_blob_name, destination_file_name):
     """Downloads a blob from the bucket."""
+    _check_if_dir_exist('data')
     storage_client = storage.Client()
     bucket = storage_client.get_bucket(bucket_name)
     blob = bucket.blob(source_blob_name)
