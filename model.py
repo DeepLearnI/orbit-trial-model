@@ -1,23 +1,13 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, roc_auc_score, confusion_matrix
 from datetime import datetime
-from dateutil.relativedelta import relativedelta
+from constants import *
+from utils import get_dates_in_range
+import numpy as np
 import pandas as pd
 import database as db
 import pickle
-from constants import *
-import numpy as np
 import foundations
-
-def get_dates_in_range(start_date, end_date):
-    assert end_date > start_date
-    assert end_date.day == start_date.day
-    dates = []
-    while end_date != start_date:
-        dates.append(end_date)
-        end_date += relativedelta(months=-1)
-    dates.append(end_date)
-    return dates
 
 
 def train(start_date, end_date, data_key):
@@ -40,7 +30,7 @@ def train(start_date, end_date, data_key):
     x_train = x_train.fillna(0)
 
     # train model
-    model =  RandomForestClassifier()
+    model = RandomForestClassifier()
     model.fit(x_train, y_train)
 
     # save model
