@@ -44,7 +44,7 @@ def train(start_date, end_date, data_key):
     model.fit(x_train, y_train)
 
     # save model
-    pickle.dump(model, open("model_package/model.pkl", "wb"))
+    pickle.dump(model, open("fitted_objects/model.pkl", "wb"))
 
 
 def predict(inference_date, data_key):
