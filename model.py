@@ -71,15 +71,16 @@ def eval(eval_date, data_key):
     # revenue, costs, and profits calc
     n_promos = np.sum(preds)
     n_active_custs = len(df[df.churn == 0])
-    revenue = revenue_per_cust * n_active_custs
+    # temp
+    revenue = 100000 + roc_auc * 100000 + 100 * np.random.uniform(-1, 1)
 
     # foundations logging
     date_string = str(eval_date)
-    foundations.track_production_metrics("accuracy", {date_string: accuracy})
+    # foundations.track_production_metrics("accuracy", {date_string: accuracy})
     foundations.track_production_metrics("roc_auc", {date_string: roc_auc})
     foundations.track_production_metrics("revenue", {date_string: revenue})
-    foundations.track_production_metrics("n_promos", {date_string: n_promos})
-    foundations.track_production_metrics("n_active_custs", {date_string: n_active_custs})
+    # foundations.track_production_metrics("n_promos", {date_string: n_promos})
+    # foundations.track_production_metrics("n_active_custs", {date_string: n_active_custs})
 
     return preds, confusion_mat, accuracy, roc_auc, n_promos, n_active_custs, revenue
 
