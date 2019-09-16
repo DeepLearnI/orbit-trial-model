@@ -65,7 +65,7 @@ The eval function takes in two arguments. the evaluation date and database key. 
 You can also inspect the dataset on GCP storage bucket: xxxx
 </details>
 
-**There is no Orbit magic so far. These are the things that you normally do in a typical data science project, but simplified for illustration purpose. **
+** There is no Orbit magic so far. These are the things that you normally do in a typical data science project, but simplified for illustration purpose. **
 
 ## Step 3 of 9: Monitoring model performance using Orbit
 
