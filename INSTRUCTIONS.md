@@ -119,3 +119,21 @@ We’ve created a simulated production environment to mimic what you would face 
 Now please go to the GUI using the other link that we shared with you (usually in the format of: `<xxxx>-<xxxx>.com/<xxxx>)`. Once you enter the GUI, you will see 1 project in the landing page. Clicking on that leads you into the project. Once you are in the project, you first click the (?) button, located on the top right corner, to go through a quick overview of the GUI.
 
 After that, **keep an eye on the model performance over time, located in the Model Evaluation tab. We recommend that you come back here in a couple of minutes and go through the rest of this tutorial.**
+
+## Step 6 of 9: The big problem
+
+By now, you are probably beginning to see that your model performance is suffering. You can tell by going to Model Evaluation tab, which monitors your model performance in production over time.
+
+**Question:** now that your model performance is decaying, revenue is dropping minute after minute (month as month in real life). What do you do?
+
+**Here are three options you normally have in real-life**
+If you are a Data Science guru, you roll up your sleeves and head to the IDE and do some investigation on the dataset. You are welcome to write some python code to identify & resolve the problem, and re-deploy your new model following the instructions in Step 2
+If you are not technical, you can reach out to someone else to assist on the task. Is there a data scientist from your company that can spare the time from other initiatives to help you out?
+You can email the original model developer at a.lu@dessa.com. He will fix the issue for you. He’s quite busy on his new projects, but he will try his best to get back to you in a couple of weeks
+
+**Regardless of which option you choose, you need to act fast because your company is bleeding money now as you are reading this.**
+
+There is a fourth option. You let Foundations Orbit help you identify & resolve the issue in a few steps in the next section.
+
+**Step 7 of 9: The Orbit way
+
