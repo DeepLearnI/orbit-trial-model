@@ -20,3 +20,11 @@ Let’s imagine you work at a meal-kit company, called **Hello, Food**. The busi
 **Hello, Food**'s revenues are falling as customer attrition has overtaken new subscriptions. In an attempt to retain customers, the company has decided to earmark some money to start a retention initiative by sending special offers to a subset of the customer base.
 
 **You are in charge of this initiative! Good luck!**
+
+Here are some facts about the business:
+* Revenue per customer: $xxx per month
+* Number of customers (as of the start of this trial): xxx
+* Monthly growth rate: xxx% 
+* Monthly attrition rate (as of the start of this trial): xxx%
+* Special offer capacity*: xxx%
+
