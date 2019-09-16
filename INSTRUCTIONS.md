@@ -97,3 +97,23 @@ Foundations automatically package up the code and model and wraps it in REST API
 
 **Congratulations, you’ve deployed your churn model!**
 
+## Step 5 of 9: Monitoring your model using Orbit GUI
+
+Now, we need to start monitoring how well our model is performing on live data. 
+
+In the real life situation, the following would happen on a monthly basis:
+* Every month, the Operations team will get predictions from your model
+  * I.e., a list of customers the model predicts to be at risk of churn
+* Some actions are performed by the Operations team based on the predictions
+  * I.e., actually sending out the special offer to the customers
+* As the results, customer behaviours are impacted and captured as data
+  * I.e., some customers leave/stay, reflected by their xxx in the database
+
+We’ve created a simulated production environment to mimic what you would face in real life:
+* Every 1 minute of the trial equates to 1 month in real life
+* Every 1 minute (every month), the simulated environment:
+  * Gets predictions from your model
+  * Actions on the predictions 
+  * Simulates outcome of the actions and updates the database
+
+
