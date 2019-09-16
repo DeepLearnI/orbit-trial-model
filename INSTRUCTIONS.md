@@ -26,9 +26,9 @@ Here are some facts about the business:
 * Number of customers (as of the start of this trial): xxx
 * Monthly growth rate: xxx% 
 * Monthly attrition rate (as of the start of this trial): xxx%
-* Special offer capacity&ast: xxx%
+* Special offer capacity\*: xxx%
 
-&ast The company has budget to send special offer to 10% of customers each month. For simplicity, let’s assume:
+\*The company has budget to send special offer to 10% of customers each month. For simplicity, let’s assume:
 * If a customer wants to churn and receives an offer before they actually do, their likelihood of churn will significantly reduce
 * If a customer has no intention to churn but receives an offer, they will still get the benefits of the special offer. However, this would be a waste of the retention budget
 
