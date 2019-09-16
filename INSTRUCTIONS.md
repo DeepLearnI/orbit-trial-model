@@ -91,7 +91,7 @@ We've included a configuration file foundations_package_manifest.yaml which tell
 
 Next, In the terminal, please enter this command then press ‘Enter’ key
 ```bash
-foundations orbit serve start --project_name=orbit-trial --model_name=test-1 --project_directory=./ --env=scheduler
+foundations orbit serve start --project_name=orbit-trial --model_name=model-1 --project_directory=./ --env=scheduler
 ```
 Foundations automatically package up the code and model and wraps it in REST API. Requests can be made to the entrypoints specified by the `foundations_package_manifest.yaml` file.
 
@@ -137,3 +137,36 @@ There is a fourth option. You let Foundations Orbit help you identify & resolve 
 
 ## Step 7 of 9: The Orbit way
 
+Machine learning models in production typically suffer from two types of issues: 
+
+1. **Unexpected changes in production data.** IT and operations changes can lead to unexpected data anomalies capable of adversely affecting model performance. These changes aren’t tracked by traditional IT systems, which means that teams don’t notice them until it’s too late. For example, the team that maintains the databases might not know that your model is dependent on a particular column and decided to make changes to it, such as using a different value to encode something. Small changes like that could proliferate through various data systems and eventually leads to drastic changes by the time the data reach your models
+
+2. **Population or concept drift:** Models are trained using historical data, but changes in customer behaviours and business operations happen over time, changing the underlying relationships between model input and output. In reality, models in production degrade in performance. It is only a matter of time before they become obsolete.
+
+Luckily, with very little changes to our code, you can have the power to address these issues using Orbit.
+
+Let’s start by adding these two lines of code to the `train(...)` function in `model.py`:
+```python
+  dc = DataContract("my_contract", train_df)
+  dc.save(".")
+```
+
+Add these two lines of code to the `predict(...)` function in `model.py`:
+```python
+  dc = DataContract.load(".", "my_contract")
+  dc.validate(x_train, inference_date)
+```
+In terminal, run 
+```bash
+python train_driver.py
+```
+
+Add these two lines of code to the end of `foundations_package_manifest.yaml`
+
+```python
+```
+
+Then run this in terminal:
+```bash
+foundations orbit serve start --project_name=orbit-trial --model_name=model-2 --project_directory=./ --env=scheduler
+```
