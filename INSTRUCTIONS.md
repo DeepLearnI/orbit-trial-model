@@ -91,7 +91,7 @@ We've included a configuration file foundations_package_manifest.yaml which tell
 
 Next, In the terminal, please enter this command then press ‘Enter’ key
 ```bash
-foundations orbit serve start xxx
+foundations orbit serve start --project_name=orbit-trial --model_name=test-1 --project_directory=./ --env=scheduler
 ```
 Foundations automatically package up the code and model and wraps it in REST API. Requests can be made to the entrypoints specified by the `foundations_package_manifest.yaml` file.
 
