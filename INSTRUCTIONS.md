@@ -116,4 +116,6 @@ We’ve created a simulated production environment to mimic what you would face 
   * Actions on the predictions 
   * Simulates outcome of the actions and updates the database
 
+Now please go to the GUI using the other link that we shared with you (usually in the format of: `<xxxx>-<xxxx>.com/<xxxx>)`. Once you enter the GUI, you will see 1 project in the landing page. Clicking on that leads you into the project. Once you are in the project, you first click the (?) button, located on the top right corner, to go through a quick overview of the GUI.
 
+After that, **keep an eye on the model performance over time, located in the Model Evaluation tab. We recommend that you come back here in a couple of minutes and go through the rest of this tutorial.**
