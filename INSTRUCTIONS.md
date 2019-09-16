@@ -43,9 +43,9 @@ The code written by Hello Food’s Data Scientists can be viewed on this editor.
 At a high level, it includes some code to train the model, some code to use the model for inference, some code to evaluate the performance of the model. In the optional reading session below, we will go through different parts of the project code and explain what they do. If you skip this section. Just know that there’s some code that Hello, Food data scientists wrote to tackle this use case. 
 
 Now, let’s run the training code to create the model. Please navigate to the terminal windows, located below, and type the following command followed by the ‘Enter’ key:
-
-python train.py
-
+```bash
+python train_driver.py
+```
 Once it completes, you can see in fitted_object/ folder that a new model was created as a result of the training, with the name model.pkl unless you change the code
 
 ### Optional reading
