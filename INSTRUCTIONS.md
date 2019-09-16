@@ -65,12 +65,23 @@ The eval function takes in two arguments. the evaluation date and database key. 
 You can also inspect the dataset on GCP storage bucket: xxxx
 </details>
 
-** There is no Orbit magic so far. These are the things that you normally do in a typical data science project, but simplified for illustration purpose. **
+
+**There is no Orbit magic so far. These are the things that you normally do in a typical data science project, but simplified for illustration purpose. **
 
 ## Step 3 of 9: Monitoring model performance using Orbit
 
 Now, we are ready to deploy the model into production, which we will show in the next section. However, one thing is still missing. As soon as we deploy this model into the simulated production environment, it will start being consumed by the production environment and having impacts on the Hello, Food’s business. **How can you track the performance metrics of your model over time, and be able to monitor them easily?**
 
+With Orbit, this is as easy as adding a couple lines of code. Now, let’s add the following lines of code to the eval(...) function in model.py (after line xxx)
+
+```python
+  date_string = str(eval_date)
+  foundations.track_production_metrics("accuracy", {date_string: accuracy})
+  foundations.track_production_metrics("roc_auc", {date_string: roc_auc})
+  foundations.track_production_metrics("revenue", {date_string: revenue})
+  foundations.track_production_metrics("n_promos", {date_string: n_promos})
+  foundations.track_production_metrics("n_active_custs", {date_string: n_active_custs})
+```
 
 
 
