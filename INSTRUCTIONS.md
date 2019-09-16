@@ -48,9 +48,8 @@ python train_driver.py
 ```
 Once it completes, you can see in fitted_object/ folder that a new model was created as a result of the training, with the name model.pkl unless you change the code
 
-### Optional Reading
 <details>
-  <summary>Click to expand!</summary>
+  <summary>Optional reading</summary>
 
 In the directory explorer, click on the project_code/ folder and open the model.py file in the editor. 
 
@@ -72,7 +71,7 @@ You can also inspect the dataset on GCP storage bucket: xxxx
 
 Now, we are ready to deploy the model into production, which we will show in the next section. However, one thing is still missing. As soon as we deploy this model into the simulated production environment, it will start being consumed by the production environment and having impacts on the Hello, Food’s business. **How can you track the performance metrics of your model over time, and be able to monitor them easily?**
 
-With Orbit, this is as easy as adding a couple lines of code. Now, let’s add the following lines of code to the eval(...) function in model.py (after line xxx)
+With Orbit, this is as easy as adding a couple lines of code. Now, let’s add the following lines of code to the `eval(...)` function in `model.py` (after line xxx)
 
 ```python
   date_string = str(eval_date)
