@@ -34,6 +34,9 @@ Here are some facts about the business:
 
 4 months ago, you and your team decided to develop a machine learning model to **predict which customers are likely to churn so that they can be targeted for special offers.** The ultimate measure of success and business metric is **monthly revenue** ($300 x number of customers that month). 
 
-Now the model is ready to be deployed and all production systems are wired up. You are getting ready to deploy the model and hopefully it will have a positive impact on the business: lower churn, more revenue
+Now the model is ready to be deployed and all production systems are wired up. You are getting ready to deploy the model and hopefully it will have a positive impact on the business: **lower churn, more revenue**
+
+## Step 2 of 9: Introduction to the sample solution code
+
 
 
