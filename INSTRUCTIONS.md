@@ -65,7 +65,7 @@ You can also inspect the dataset on GCP storage bucket: xxxx
 </details>
 
 
-**There is no Orbit magic so far. These are the things that you normally do in a typical data science project, but simplified for illustration purpose. **
+**There is no Orbit magic so far. These are the things that you normally do in a typical data science project, but simplified for illustration purpose.**
 
 ## Step 3 of 9: Monitoring model performance using Orbit
 
@@ -74,13 +74,26 @@ Now, we are ready to deploy the model into production, which we will show in the
 With Orbit, this is as easy as adding a couple lines of code. Now, let’s add the following lines of code to the `eval(...)` function in `model.py` (after line xxx)
 
 ```python
-  date_string = str(eval_date)
-  foundations.track_production_metrics("accuracy", {date_string: accuracy})
-  foundations.track_production_metrics("roc_auc", {date_string: roc_auc})
-  foundations.track_production_metrics("revenue", {date_string: revenue})
-  foundations.track_production_metrics("n_promos", {date_string: n_promos})
-  foundations.track_production_metrics("n_active_custs", {date_string: n_active_custs})
+  foundations.track_production_metrics("accuracy", {str(eval_date): accuracy})
+  foundations.track_production_metrics("roc_auc", {str(eval_date): roc_auc})
+  foundations.track_production_metrics("revenue", {str(eval_date): revenue})
+  foundations.track_production_metrics("n_promos", {str(eval_date): n_promos})
+  foundations.track_production_metrics("n_active_custs", {str(eval_date): n_active_custs})
 ```
 
+## Step 4 of 9: Deploying the model
 
+Now, let’s deploy the trained model to our simulated production environment. 
+
+Foundations provides a standard format to seamlessly package machine learning models for production.
+
+We've included a configuration file foundations_package_manifest.yaml which tells Foundations to serve the `predict(...)` function from `model.py`
+
+Next, In the terminal, please enter this command then press ‘Enter’ key
+```bash
+foundations orbit serve start xxx
+```
+Foundations automatically package up the code and model and wraps it in REST API. Requests can be made to the entrypoints specified by the `foundations_package_manifest.yaml` file.
+
+**Congratulations, you’ve deployed your churn model!**
 
