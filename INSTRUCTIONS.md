@@ -48,6 +48,12 @@ python train_driver.py
 ```
 Once it completes, you can see in fitted_object/ folder that a new model was created as a result of the training, with the name model.pkl unless you change the code
 
-### Optional reading
-xxx
+### Optional Reading
+<details>
+  <summary>Click to expand!</summary>
+  1. A numbered
+  2. list
+     * With some
+     * Sub bullets
+</details>
 
