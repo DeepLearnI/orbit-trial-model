@@ -51,9 +51,16 @@ Once it completes, you can see in fitted_object/ folder that a new model was cre
 ### Optional Reading
 <details>
   <summary>Click to expand!</summary>
-  1. A numbered
-  2. list
-     * With some
-     * Sub bullets
+In the directory explorer, click on the project_code/ folder and open the model.py file in the editor. 
+
+There are three functions in model.py: train, predict, and eval. Except for a couple of lines in eval function, there’s no Foundations Orbit feature so far.
+
+The train function takes in three arguments, start and end dates your training period and a database key. The database key is only for the trial to identify the part of the data that has been allocated for you. Given these arguments, the train function fetches the data, processes them, trains a simple XGBoost model, and save the model to a specified location. 
+
+The predict function takes in two arguments, the inference date and database key. Given the inference date, the function pulls from database the data it needs to run prediction for the specified date, then saves the predictions back to the database.
+
+The eval function takes in two arguments. the evaluation date and database key. Given evaluation key, the function pulls from database the data it needs to compute metrics as of the evaluation date, computes the metrics, and use Foundations Orbit’s track_production_metrics to log and store the metrics.
+
+You can also inspect the dataset on GCP storage bucket: xxxx
 </details>
 
