@@ -147,7 +147,7 @@ Luckily, with very little changes to our code, you can have the power to address
 
 Let’s start by adding these two lines of code to the `train(...)` function in `model.py`:
 ```python
-  dc = DataContract("my_contract", train_df)
+  dc = DataContract("my_contract", x_train)
   dc.save(".")
 ```
 
