@@ -51,6 +51,7 @@ Once it completes, you can see in fitted_object/ folder that a new model was cre
 ### Optional Reading
 <details>
   <summary>Click to expand!</summary>
+
 In the directory explorer, click on the project_code/ folder and open the model.py file in the editor. 
 
 There are three functions in model.py: train, predict, and eval. Except for a couple of lines in eval function, there’s no Foundations Orbit feature so far.
@@ -63,4 +64,13 @@ The eval function takes in two arguments. the evaluation date and database key. 
 
 You can also inspect the dataset on GCP storage bucket: xxxx
 </details>
+
+**There is no Orbit magic so far. These are the things that you normally do in a typical data science project, but simplified for illustration purpose. **
+
+## Step 3 of 9: Monitoring model performance using Orbit
+
+Now, we are ready to deploy the model into production, which we will show in the next section. However, one thing is still missing. As soon as we deploy this model into the simulated production environment, it will start being consumed by the production environment and having impacts on the Hello, Food’s business. **How can you track the performance metrics of your model over time, and be able to monitor them easily?**
+
+
+
 
