@@ -135,5 +135,5 @@ You can email the original model developer at a.lu@dessa.com. He will fix the is
 
 There is a fourth option. You let Foundations Orbit help you identify & resolve the issue in a few steps in the next section.
 
-**Step 7 of 9: The Orbit way
+## Step 7 of 9: The Orbit way
 
