@@ -10,3 +10,13 @@ We’re providing you with a fully-managed environment so you can focus on under
 * A tutorial with example code & data
 * A simulated production environment
 * Free cloud compute
+
+## Step 1 of 9: Introduction to the problem
+
+Let’s imagine you work at a meal-kit company, called **Hello, Food**. The business model is to prepare & deliver the ingredients for meals every week to subscribed customers for them to cook themselves. 
+
+<placeholder for log>
+  
+**Hello, Food**'s revenues are falling as customer attrition has overtaken new subscriptions. In an attempt to retain customers, the company has decided to earmark some money to start a retention initiative by sending special offers to a subset of the customer base.
+
+**You are in charge of this initiative! Good luck!**
