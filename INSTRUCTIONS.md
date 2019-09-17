@@ -160,13 +160,13 @@ Machine learning models in production typically suffer from two types of issues:
 
 Luckily, with very little changes to our code, you can have the power to address these issues using Orbit.
 
-Let’s start by adding these two lines of code to the `train(...)` function in `model.py`:
+Let’s start by adding these two lines of code to the `train(...)` function in `model.py`. This should be around line 30. Insert this after the line `# insert DataContract creation code here #`
 ```python
   dc = DataContract("my_contract", x_train)
   dc.save(".")
 ```
 
-Add these two lines of code to the `predict(...)` function in `model.py`:
+Add these two lines of code to the `predict(...)` function in `model.py`. This should be around line 51. Insert this after the line `# insert DataContract validation code here #`
 ```python
   dc = DataContract.load(".", "my_contract")
   dc.validate(x_train, inference_date)
@@ -176,12 +176,21 @@ In terminal, run
 python train_driver.py
 ```
 
-Add these two lines of code to the end of `foundations_package_manifest.yaml`
-
-```python
+Edit your `foundations_package_manifest.yaml` to the following:
+```yaml
+entrypoints:
+  predict:
+    module: 'model'
+    function: 'predict'
+  evaluate:
+    module: 'model'
+    function: 'eval'
+  recalibrate:
+    module: 'model'
+    function: 'train'
 ```
 
 Then run this in terminal:
 ```bash
-foundations orbit serve start --project_name=orbit-trial --model_name=model-2 --project_directory=./ --env=scheduler
+foundations orbit serve start --project_name=orbit-trial --model_name=model_v2 --project_directory=./ --env=scheduler
 ```
