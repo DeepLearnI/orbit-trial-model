@@ -1,4 +1,4 @@
-from dateutil import relativedelta
+from dateutil.relativedelta import relativedelta
 
 
 def get_dates_in_range(start_date, end_date):

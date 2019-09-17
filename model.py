@@ -7,7 +7,6 @@ import numpy as np
 import pandas as pd
 import database as db
 import pickle
-import foundations
 
 
 def train(start_date, end_date, data_key):
@@ -27,6 +26,11 @@ def train(start_date, end_date, data_key):
     # split features from target
     y_train = train_df['churn']
     x_train = train_df.drop(['cust_id', 'date', 'churn', 'predicted_churn_probability'], axis=1)
+
+    # insert DataContract creation code here #
+
+    ##########################################
+
     x_train = x_train.fillna(0)
 
     # train model
@@ -43,6 +47,11 @@ def predict(inference_date, data_key):
     inference_df = db.load(f'{data_key}-inference-{inference_date}')
     # drop non-feature columns
     x_train = inference_df.drop(['cust_id', 'date'], axis=1)
+
+    # insert DataContract validation code here #
+
+    ############################################
+
     x_train = x_train.fillna(0)
 
     # load model
@@ -71,16 +80,11 @@ def eval(eval_date, data_key):
     # revenue, costs, and profits calc
     n_promos = np.sum(preds)
     n_active_custs = len(df[df.churn == 0])
-    # temp
-    revenue = 100000 + roc_auc * 100000 + 100 * np.random.uniform(-1, 1)
+    revenue = revenue_per_cust * n_active_custs
 
-    # foundations logging
-    date_string = str(eval_date)
-    # foundations.track_production_metrics("accuracy", {date_string: accuracy})
-    foundations.track_production_metrics("roc_auc", {date_string: roc_auc})
-    foundations.track_production_metrics("revenue", {date_string: revenue})
-    # foundations.track_production_metrics("n_promos", {date_string: n_promos})
-    # foundations.track_production_metrics("n_active_custs", {date_string: n_active_custs})
+    # insert foundations metric tracking here #
+
+    ###########################################
 
     return preds, confusion_mat, accuracy, roc_auc, n_promos, n_active_custs, revenue
 
