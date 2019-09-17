@@ -117,12 +117,9 @@ Foundations automatically package up the code and model and wraps it in REST API
 Now, we need to start monitoring how well our model is performing on live data. 
 
 In the real life situation, the following would happen on a monthly basis:
-* Every month, the Operations team will get predictions from your model
-  * I.e., a list of customers the model predicts to be at risk of churn
-* Some actions are performed by the Operations team based on the predictions
-  * I.e., actually sending out the special offer to the customers
-* As the results, customer behaviours are impacted and captured as data
-  * I.e., some customers leave/stay, reflected by their xxx in the database
+* Every month, the Operations team will get predictions from your model (i.e., a list of customers the model predicts to be at risk of churn)
+* Some actions are performed by the Operations team based on the predictions (i.e., actually sending out the special offer to the customers)
+* As the results, customer behaviours are impacted and captured as data (i.e., some customers leave/stay, reflected by their xxx in the database)
 
 We’ve created a simulated production environment to mimic what you would face in real life:
 * Every 1 minute of the trial equates to 1 month in real life
@@ -194,3 +191,19 @@ Then run this in terminal:
 ```bash
 foundations orbit serve start --project_name=orbit-trial --model_name=model_v2 --project_directory=./ --env=scheduler
 ```
+
+<details>
+  <summary>Optional reading</summary>
+This is adding a recalibration endpoint for the model package. As we serve this model, Foundations creates a new microservice for this model with a recalibration endpoint that can be hit via API to trigger recalibration
+</details>
+
+Now you are ready to head back to the GUI. Once you are back in the GUI, you will see a new model package in the Model Management tab. You can click the checkbox in the “Default” column to make the new model your default model for the project. After that, you are ready to continue your journey.
+
+At any time, you can use the information on Data Health and Model Evaluation tabs to understand performance issues in production. 
+
+## Step 8 of 9: Catch unexpected abnormality in production data
+
+## Step 9 of 9: Address population and concept drift with recalibration
+
+**Congratulations. You’ve completed the trial.** You are welcome to stay in the trial environment and continue to get familiar with the various features. The simulated environment will continue to introduce different issues, which you can address using the tools we showed you.
+
