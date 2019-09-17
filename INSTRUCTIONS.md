@@ -71,13 +71,18 @@ You can also inspect the dataset on GCP storage bucket: xxxx
 
 Now, we are ready to deploy the model into production, which we will show in the next section. However, one thing is still missing. As soon as we deploy this model into the simulated production environment, it will start being consumed by the production environment and having impacts on the Hello, Food’s business. **How can you track the performance metrics of your model over time, and be able to monitor them easily?**
 
-With Orbit, this is as easy as adding a couple lines of code. Now, let’s add the following lines of code to the `eval(...)` function in `model.py` (after line xxx)
+With Orbit, this is as easy as adding a couple lines of code. Now, let’s add the following line of code to the `model.py` after line 9
+
+```python
+import foundations
+```
+
+Then add the following code to the `eval(...)` function in `model.py` around line 85. After the line `# insert foundations metric tracking here #`
 
 ```python
   foundations.track_production_metrics("accuracy", {str(eval_date): accuracy})
   foundations.track_production_metrics("roc_auc", {str(eval_date): roc_auc})
   foundations.track_production_metrics("revenue", {str(eval_date): revenue})
-  foundations.track_production_metrics("n_promos", {str(eval_date): n_promos})
   foundations.track_production_metrics("n_active_custs", {str(eval_date): n_active_custs})
 ```
 
@@ -87,11 +92,21 @@ Now, let’s deploy the trained model to our simulated production environment.
 
 Foundations provides a standard format to seamlessly package machine learning models for production.
 
-We've included a configuration file foundations_package_manifest.yaml which tells Foundations to serve the `predict(...)` function from `model.py`
+Copy and paste the following code in `foundations_package_manifest.yaml`, which tells Foundations to serve the `predict(...)` function from `model.py`:
 
-Next, In the terminal, please enter this command then press ‘Enter’ key
+```yaml
+entrypoints:
+  predict:
+    module: 'model'
+    function: 'predict'
+  evaluate:
+    module: 'model'
+    function: 'eval'
+```
+
+Next, In the terminal, please enter this command then press ‘Enter’ key. You can replace `model_v1` with any name you want to give this model package.
 ```bash
-foundations orbit serve start --project_name=orbit-trial --model_name=model-1 --project_directory=./ --env=scheduler
+foundations orbit serve start --project_name=orbit-trial --model_name=model_v1 --project_directory=./ --env=scheduler
 ```
 Foundations automatically package up the code and model and wraps it in REST API. Requests can be made to the entrypoints specified by the `foundations_package_manifest.yaml` file.
 
