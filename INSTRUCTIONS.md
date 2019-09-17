@@ -157,7 +157,13 @@ Machine learning models in production typically suffer from two types of issues:
 
 Luckily, with very little changes to our code, you can have the power to address these issues using Orbit.
 
-Let’s start by adding these two lines of code to the `train(...)` function in `model.py`. This should be around line 30. Insert this after the line `# insert DataContract creation code here #`
+Let’s start by adding the following line of code to the `model.py` after line 10
+
+```python
+from foundations_orbit import DataContract
+```
+
+Add these two lines of code to the `train(...)` function in `model.py`. This should be around line 30. Insert this after the line `# insert DataContract creation code here #`
 ```python
   dc = DataContract("my_contract", x_train)
   dc.save(".")
@@ -168,6 +174,7 @@ Add these two lines of code to the `predict(...)` function in `model.py`. This s
   dc = DataContract.load(".", "my_contract")
   dc.validate(x_train, inference_date)
 ```
+
 In terminal, run 
 ```bash
 python train_driver.py
@@ -197,9 +204,10 @@ foundations orbit serve start --project_name=orbit-trial --model_name=model_v2 -
 This is adding a recalibration endpoint for the model package. As we serve this model, Foundations creates a new microservice for this model with a recalibration endpoint that can be hit via API to trigger recalibration
 </details>
 
-Now you are ready to head back to the GUI. Once you are back in the GUI, you will see a new model package in the Model Management tab. You can click the checkbox in the “Default” column to make the new model your default model for the project. After that, you are ready to continue your journey.
-
-At any time, you can use the information on Data Health and Model Evaluation tabs to understand performance issues in production. 
+Now you are ready to head back to the GUI. Once you are back in the GUI, you will see the new model package that you just deployed. Please do the following:
+* Navigate to **Model Management** tab using the side bar
+* Under **Model Registry** click the **Default** checkbox for the model package that you just deployed (named "model_v2" if you followed our instruction)
+* Use the information on **Data Health** and **Model Evaluation** tabs to understand performance issues in production
 
 ## Step 8 of 9: Catch unexpected abnormality in production data
 
