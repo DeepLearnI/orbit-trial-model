@@ -80,10 +80,10 @@ import foundations
 Then add the following code to the `eval(...)` function in `model.py` around line 85. After the line `# insert foundations metric tracking here #`
 
 ```python
-  foundations.track_production_metrics("accuracy", {str(eval_date): accuracy})
-  foundations.track_production_metrics("roc_auc", {str(eval_date): roc_auc})
-  foundations.track_production_metrics("revenue", {str(eval_date): revenue})
-  foundations.track_production_metrics("n_active_custs", {str(eval_date): n_active_custs})
+    foundations.track_production_metrics("accuracy", {str(eval_date): accuracy})
+    foundations.track_production_metrics("roc_auc", {str(eval_date): roc_auc})
+    foundations.track_production_metrics("revenue", {str(eval_date): revenue})
+    foundations.track_production_metrics("n_active_custs", {str(eval_date): n_active_custs})
 ```
 
 ## Step 4 of 9: Deploying the model
@@ -165,14 +165,14 @@ from foundations_orbit import DataContract
 
 Add these two lines of code to the `train(...)` function in `model.py`. This should be around line 30. Insert this after the line `# insert DataContract creation code here #`
 ```python
-  dc = DataContract("my_contract", x_train)
-  dc.save(".")
+    dc = DataContract("my_contract", x_train)
+    dc.save(".")
 ```
 
 Add these two lines of code to the `predict(...)` function in `model.py`. This should be around line 51. Insert this after the line `# insert DataContract validation code here #`
 ```python
-  dc = DataContract.load(".", "my_contract")
-  dc.validate(x_train, inference_date)
+    dc = DataContract.load(".", "my_contract")
+    dc.validate(x_train, inference_date)
 ```
 
 In terminal, run 
