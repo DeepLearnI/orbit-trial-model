@@ -42,7 +42,7 @@ The code written by Hello Food’s Data Scientists can be viewed on this editor.
 
 At a high level, it includes some code to train the model, some code to use the model for inference, some code to evaluate the performance of the model. In the optional reading session below, we will go through different parts of the project code and explain what they do. If you skip this section. Just know that there’s some code that Hello, Food data scientists wrote to tackle this use case. 
 
-Now, let’s run the training code to create the model. Please navigate to the terminal windows, located below, and type the following command followed by the ‘Enter’ key:
+Now, let’s run the training code to create the model. Please navigate to the terminal window by clicking **Terminal** at the top bar and **New Terminal Window**. Enter the following command, then press the ‘Enter’ key:
 ```bash
 python train_driver.py
 ```
@@ -69,7 +69,7 @@ You can also inspect the dataset on GCP storage bucket: xxxx
 
 ## Step 3 of 9: Monitoring model performance using Orbit
 
-Now, we are ready to deploy the model into production, which we will show in the next section. However, one thing is still missing. As soon as we deploy this model into the simulated production environment, it will start being consumed by the production environment and having impacts on the Hello, Food’s business. **How can you track the performance metrics of your model over time, and be able to monitor them easily?**
+Now, we are ready to deploy the model into production. However, one thing is still missing. As soon as we deploy this model into the simulated production environment, it will start being consumed by the production environment and having impacts on the Hello, Food’s business. **How can you track the performance metrics of your model over time, and be able to monitor them easily?**
 
 With Orbit, this is as easy as adding a couple lines of code. Now, let’s add the following line of code to the `model.py` after line 9
 
@@ -80,6 +80,7 @@ import foundations
 Then add the following code to the `eval(...)` function in `model.py` around line 85. After the line `# insert foundations metric tracking here #`
 
 ```python
+    # insert foundations metric tracking here #
     foundations.track_production_metrics("accuracy", {str(eval_date): accuracy})
     foundations.track_production_metrics("roc_auc", {str(eval_date): roc_auc})
     foundations.track_production_metrics("revenue", {str(eval_date): revenue})
@@ -165,12 +166,14 @@ from foundations_orbit import DataContract
 
 Add these two lines of code to the `train(...)` function in `model.py`. This should be around line 30. Insert this after the line `# insert DataContract creation code here #`
 ```python
+    # insert DataContract creation code here #
     dc = DataContract("my_contract", x_train)
     dc.save(".")
 ```
 
 Add these two lines of code to the `predict(...)` function in `model.py`. This should be around line 51. Insert this after the line `# insert DataContract validation code here #`
 ```python
+    # insert DataContract validation code here #
     dc = DataContract.load(".", "my_contract")
     dc.validate(x_train, inference_date)
 ```
@@ -274,7 +277,6 @@ While not part of this trial, the full Orbit platform also provides more sophist
 * Auto-swap
 * Canary release for new models
 
-
 ## Congratulations. You’ve completed the trial.
 You are welcome to stay in the trial environment and continue to get familiar with the various features. The simulated environment will continue to introduce different issues, which you can address using the tools we showed you.
 
@@ -297,6 +299,7 @@ You are welcome to stay in the trial environment and continue to get familiar wi
 1. We would like to hear your what you think about Foundations Orbit!
 Fill out the post-trial survey that we sent you. Tell us what you thought of Foundations Orbit via email or tweet us @Dessa
 
-2. Try this on your own infrastructure and machine learning user cases. There are several options, contact us to learn more
+2. Try this on your own infrastructure and machine learning user cases. There are several options, contact us at 
+foundations@dessa.com to learn more
 
 3. Try out our model development platform, Foundations Atlas. This is a tool to give superpower to Data Scientists so they can develop machine learning models better and faster. You download the Community Edition for free at https://www.atlas.dessa.com/
