@@ -52,18 +52,16 @@ You can also inspect the dataset on GCP storage bucket: xxxxxx
 
 Now, let’s run the training code to create the model. 
 
-First, open `train_driver.py` in the editor by clicking on the file in the directory explorer to the left.
-
-Replace `your_ip_here` in line 11 with your `user_key`. For example, if the `user_key` we assigned to you is `12.34.56.78`, then line 11 should be:
+First, open `train_driver.py` in the editor by clicking on the file in the directory explorer to the left. Replace `your_ip_here` in line 11 with your `user_key`. This is only to tell the training code to only access the dataset that has been allocated for your trial. For example, if the `user_key` we assigned to you is `12.34.56.78`, then line 11 should be:
 ```python
 data_key = "12.34.56.78"
 ```
 
-Please navigate to the terminal window by clicking **Terminal** at the top bar and **New Terminal Window**. Enter the following command, then press the ‘Enter’ key:
+Then, please navigate to the terminal window by clicking **Terminal** at the top bar and **New Terminal Window**. Enter the following command, then press the ‘Enter’ key:
 ```bash
 python train_driver.py
 ```
-Once it completes, you can see in `fitted_object/` folder that a new model was created as a result of the training, with the name `model.pkl` unless you change the code
+Once it completes, you can see in `fitted_objects/` folder that a new model was created as a result of the training, with the name `model.pkl` unless you change the code
 
 **There is no Orbit magic so far. These are the things that you normally do in a typical data science project, but simplified for illustration purpose.**
 
