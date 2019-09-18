@@ -241,6 +241,7 @@ Please do the following on the GUI:
 * Under **Model Package Name**, enter a name for the model that you are about to create. For example, enter “model-v3”
 * Under **Description**, enter description. For example, enter “recalibrating model using latest data”
 * Under **Parameters**, enter the following, use the **+** or **-** button to add/remove parameters
+ 
   | Key        | Value       |
   | -----------|-------------|
   | start_date | <start_date>|
