@@ -9,7 +9,6 @@ import pandas as pd
 import database as db
 import pickle
 
-
 def train(start_date, end_date):
     # get all dates for loading data
     start_date = datetime.strptime(start_date, "%Y-%m-%d")
