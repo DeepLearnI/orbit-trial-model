@@ -243,7 +243,7 @@ Please do the following on the GUI:
 * Under **Parameters**, enter the following, use the **+** or **-** button to add/remove parameters
  
  <details>
-  <summary>Optional reading</summary>
+  <summary>Instructions for parameters, click to expand</summary>
  
   | Key        | Value       |
   | -----------|-------------|
