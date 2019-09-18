@@ -41,11 +41,11 @@ In the directory explorer, click and open the `model.py` file in the editor.
 
 There are three functions in `model.py`: train, predict, and eval. There’s no Foundations Orbit feature in them right now.
 
-The train function takes in three arguments, start and end dates your training period and a database key. The database key is only for the trial to identify the part of the data that has been allocated for you. Given these arguments, the train function fetches the data, processes them, trains a simple random forest model, and save the model to a specified location. 
+The train function takes in two arguments: start and end dates your training period. Given these arguments, the train function fetches the data, processes them, trains a simple random forest model, and save the model to a specified location. 
 
-The predict function takes in two arguments, the inference date and database key. Given the inference date, the function pulls from database the data it needs to run prediction for the specified date, then saves the predictions back to the database.
+The predict function takes in one argument: the inference data. Given the inference date, the function pulls from database the data it needs to run prediction for the specified date, then saves the predictions back to the database.
 
-The eval function takes in two arguments. the evaluation date and database key. Given evaluation key, the function pulls from database the data it needs to compute metrics as of the evaluation date, computes the metrics, and use Foundations Orbit’s track_production_metrics to log and store the metrics.
+The eval function takes in one argument: the evaluation date. Given evaluation key, the function pulls from database the data it needs to compute metrics as of the evaluation date, computes the metrics, and use Foundations Orbit’s track_production_metrics to log and store the metrics.
 
 You can also inspect the dataset on GCP storage bucket: xxxxxx
 </details>
