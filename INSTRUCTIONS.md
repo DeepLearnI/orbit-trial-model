@@ -24,11 +24,11 @@ Here are some facts about the business:
 * Number of customers (as of the start of this trial): 5000
 * Monthly growth rate: 14% 
 * Monthly attrition rate (as of the start of this trial): ~17%
-* Special offer capacity: 10%. The company has budget to send special offer to 10% of customers each month. For simplicity, let’s assume:
-  * If a customer wants to churn and receives an offer before they actually do, their likelihood of churn will significantly reduce
+* Special offer capacity: 10%. This means the company has budget to send special offer to 10% of customers each month. For simplicity, let’s assume:
+  * If a customer wants to churn and receives an offer before they actually do, their churn likelihood will significantly reduce
   * If a customer has no intention to churn but receives an offer, they will still get the benefits of the special offer. However, this would be a waste of the retention budget
 
-4 months ago, you and your team decided to develop a machine learning model to **predict which customers are likely to churn so that they can be targeted for special offers.** Now the model is ready to be deployed and all production systems are wired up. You are getting ready to deploy the model and hopefully it will have a positive impact on the business: **lower churn, more revenue** ($300 x number of active customers that month)
+**Because the company only has limited resources to address retention, it is critical to predict correctly which customers are likely to churn**. 4 months ago, your team decided to develop a **machine learning model to predict which customers are likely to churn so that they can be targeted for special offers.** Now the model is ready to be deployed and all production systems are wired up. You are getting ready to deploy the model and hopefully it will have a positive impact on the business: **lower churn, more revenue** ($300 x number of active customers that month)
 
 ## Step 2 of 9: Introduction to the sample solution code
 
@@ -52,7 +52,7 @@ You can also inspect the dataset on GCP storage bucket: xxxxxx
 
 Now, let’s run the training code to create the model. 
 
-First, open `user_key.py` in the editor by clicking on the file in the directory explorer to the left. Replace `your_key_here` with your `user_key`. This is only to tell our code to only access the dataset that has been allocated specifically for your trial. For example, if the `user_key` we assigned to you is `12.34.56.78`, then line 1 should be:
+First, open `user_key.py` in the editor by clicking on the file in the directory explorer to the left. Replace `your_data_key_here` with your `user_key`. This is only to tell our code to only access the dataset that has been allocated specifically for your trial. For example, if the `user_key` we assigned to you is `12.34.56.78`, then line 1 should be:
 ```python
 data_key = "12.34.56.78"
 ```
