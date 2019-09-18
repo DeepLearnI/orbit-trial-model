@@ -226,8 +226,9 @@ Once you’ve identify which attribute is having critical issue, remember the na
 
 ```bash
 xxxxxxxxxx/?xxx=<attribute_name>
+http://<user_key>:31998/simulator/fix_special_value?column_name=<attribute_name>
 ```
-Replacing `<attribute_name>` with the name of the attribute you want to report.
+Replacing `<attribute_name>` with the name of the attribute you want to report and `<user_key>` with your user_key
 
 Once you correctly report the issue, we will fix it. You can tell it is fixed by checking the latest validation report in the **Data Health** tab and checking the latest model performance in the **Model Evaluation** tab.
 
