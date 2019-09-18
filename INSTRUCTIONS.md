@@ -41,18 +41,18 @@ In the directory explorer, click and open the `model.py` file in the editor.
 
 There are three functions in `model.py`: train, predict, and eval. There’s no Foundations Orbit feature in them right now.
 
-The train function takes in three arguments, start and end dates your training period and a database key. The database key is only for the trial to identify the part of the data that has been allocated for you. Given these arguments, the train function fetches the data, processes them, trains a simple random forest model, and save the model to a specified location. 
+The train function takes in two arguments: start and end dates your training period. Given these arguments, the train function fetches the data, processes them, trains a simple random forest model, and save the model to a specified location. 
 
-The predict function takes in two arguments, the inference date and database key. Given the inference date, the function pulls from database the data it needs to run prediction for the specified date, then saves the predictions back to the database.
+The predict function takes in one argument: the inference data. Given the inference date, the function pulls from database the data it needs to run prediction for the specified date, then saves the predictions back to the database.
 
-The eval function takes in two arguments. the evaluation date and database key. Given evaluation key, the function pulls from database the data it needs to compute metrics as of the evaluation date, computes the metrics, and use Foundations Orbit’s track_production_metrics to log and store the metrics.
+The eval function takes in one argument: the evaluation date. Given evaluation key, the function pulls from database the data it needs to compute metrics as of the evaluation date, computes the metrics, and use Foundations Orbit’s track_production_metrics to log and store the metrics.
 
 You can also inspect the dataset on GCP storage bucket: xxxxxx
 </details>
 
 Now, let’s run the training code to create the model. 
 
-First, open `train_driver.py` in the editor by clicking on the file in the directory explorer to the left. Replace `your_ip_here` in line 11 with your `user_key`. This is only to tell the training code to only access the dataset that has been allocated for your trial. For example, if the `user_key` we assigned to you is `12.34.56.78`, then line 11 should be:
+First, open `user_key.py` in the editor by clicking on the file in the directory explorer to the left. Replace `your_key_here` with your `user_key`. This is only to tell our code to only access the dataset that has been allocated specifically for your trial. For example, if the `user_key` we assigned to you is `12.34.56.78`, then line 1 should be:
 ```python
 data_key = "12.34.56.78"
 ```
@@ -251,16 +251,14 @@ Please do the following on the GUI:
   | -----------|-------------|
   | start_date | <start_date>|
   | end_date   | <end_date>  |
-  | date_key   | <data_key>  |
 
-With `<start_date>` and `<end_date>` being the start and end of the time period that you want to recalibrate your model with. We recommend recalibrating this model with the lastest 3 months of data. <data_key> being your `user_key`. 
-For example, if the latest date in the simulated production environment, which you can find out by checking the latest date in the **Model Evaluation** tab, is 2020-10-01 and you `user_key` is 12.34.56.78. You should enter:
+With `<start_date>` and `<end_date>` being the start and end of the time period that you want to recalibrate your model with. We recommend recalibrating this model with the lastest 3 months of data. 
+For example, if the latest date in the simulated production environment, which you can find out by checking the latest date in the **Model Evaluation** tab, is 2020-10-01. You should enter:
  
   | Key        | Value       |
   | -----------|-------------|
   | start_date | 2020-07-01  |
   | end_date   | 2020-10-01  |
-  | date_key   | 12.34.56.78 |
 
 </details>
 
