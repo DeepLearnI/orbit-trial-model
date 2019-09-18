@@ -242,21 +242,30 @@ Please do the following on the GUI:
 * Under **Description**, enter description. For example, enter “recalibrating model using latest data”
 * Under **Parameters**, enter the following, use the **+** or **-** button to add/remove parameters
  
+ <details>
+  <summary>Optional reading</summary>
+ 
   | Key        | Value       |
   | -----------|-------------|
   | start_date | <start_date>|
   | end_date   | <end_date>  |
   | date_key   | <data_key>  |
+
 With `<start_date>` and `<end_date>` being the start and end of the time period that you want to recalibrate your model with. We recommend recalibrating this model with the lastest 3 months of data. <data_key> being your `user_key`. 
 For example, if the latest date in the simulated production environment, which you can find out by checking the latest date in the **Model Evaluation** tab, is 2020-10-01 and you `user_key` is 12.34.56.78. You should enter:
+ 
   | Key        | Value       |
   | -----------|-------------|
   | start_date | 2020-07-01  |
   | end_date   | 2020-10-01  |
   | date_key   | 12.34.56.78 |
-This is adding a recalibration endpoint for the model package. As we serve this model, Foundations creates a new microservice for this model with a recalibration endpoint that can be hit via API to trigger recalibration
+
+</details>
+
 * Click **Recalibrate** button
 * Under **Model Registry** click the **Default** checkbox for the newest model package (named "model-v3" if you followed our instruction)
+
+This is adding a recalibration endpoint for the model package. As we serve this model, Foundations creates a new microservice for this model with a recalibration endpoint that can be hit via API to trigger recalibration
 
 While not part of this trial, the full Orbit platform also provides more sophisticated control on how the model can be recalibrated, existing features include:
 * Scheduled recalibration
