@@ -13,7 +13,7 @@ We’re providing you with a fully-managed environment so you can focus on under
 
 ## Step 1 of 9: Introduction to the problem
 
-Let’s imagine you work at a meal-kit company, called **Hello, Food**. The business model is to prepare & deliver the ingredients for meals every week to subscribed customers for them to cook themselves. 
+Let’s imagine you work at a meal-kit subscription company, called **Hello, Food**. The business model is to prepare & deliver the ingredients for meals every week to subscribed customers for them to cook themselves. 
 
 <placeholder for log>
   
@@ -204,14 +204,61 @@ foundations orbit serve start --project_name=orbit-trial --model_name=model_v2 -
 This is adding a recalibration endpoint for the model package. As we serve this model, Foundations creates a new microservice for this model with a recalibration endpoint that can be hit via API to trigger recalibration
 </details>
 
-Now you are ready to head back to the GUI. Once you are back in the GUI, you will see the new model package that you just deployed. Please do the following:
+Now you are ready to head back to the GUI. Once you are back in the GUI, you will see the new model package that you just deployed. Please do the following on the GUI:
 * Navigate to **Model Management** tab using the side bar
 * Under **Model Registry** click the **Default** checkbox for the model package that you just deployed (named "model_v2" if you followed our instruction)
 * Use the information on **Data Health** and **Model Evaluation** tabs to understand performance issues in production
 
 ## Step 8 of 9: Catch unexpected abnormality in production data
 
+_Hint: you know that it is happening if you observe sharp decline in your model performance and significant difference in your data from development datasets. For example, if there a way too many or too few null values for some attributes than expected._
+
+Please do the following on the GUI:
+* Navigate to **Data Health** tab using the side bar
+* Under **Validation Report** drop down, select a validation report from the latest date
+* Review reports in the three tabs: **Schema Check**, **Population Shift**, and **Data Quality**
+* Check if any of the attributes have a `critical` status
+* Select a different validation report to check for issues at different time or different point of our ML pipeline
+
+Once you’ve identify which attribute is having critical issue, remember the name of the attribute, and report that to us. **We will fix the issue for you, but only if you report correct which attribute is having critical issue.** To report and fix the issue, navigate to the IDE, enter the following command in the Terminal
+
+```bash
+xxxxxxxxxx/?xxx=<attribute_name>
+```
+Replacing `<attribute_name>` with the name of the attribute you want to report.
+
+Once you correctly report the issue, we will fix it. You can tell it is fixed by checking the latest validation report in the **Data Health** tab and checking the latest model performance in the **Model Evaluation** tab.
+
+While it is not part of this trial, the full Orbit platform also offers email and slack notification features so that you can set up monitoring for data issues. The right party will get notified and start investigating right away.
+
 ## Step 9 of 9: Address population and concept drift with recalibration
+
+_Hint: you know that it is happening if there’s a gradual performance decline, while there isn’t any glaring issues with the dataset, except high population shift index for some attributes._
+
+Please do the following on the GUI:
+* Navigate to **Model Management** tab using the side bar
+* Click the **Recalibrate** button of your default model. A modal should appear on the screen
+* Under **Model Package Name**, enter a name for the model that you are about to create. For example, enter “model-v3”
+* Under **Description**, enter description. For example, enter “recalibrating model using latest data”
+* Under **Parameters**, enter the following, use the **+** or **-** button to add/remove parameters
+
+| Key        | Value       |
+| -----------|-------------|
+| start_date | <start_date>|
+| end_date   | <end_date>  |
+| date_key   | <data_key>  |
+
+Replacing <start_date> with 
+Key
+Value
+start_date
+enter the start day, in the format of yyyy-mm-dd (e.g., 2019-09-01)
+end_date
+enter the latest day, in the format of yyyy-mm-dd (e.g., 2020-09-01)
+data_key
+enter the key that are assigned to you
+
+
 
 **Congratulations. You’ve completed the trial.** You are welcome to stay in the trial environment and continue to get familiar with the various features. The simulated environment will continue to introduce different issues, which you can address using the tools we showed you.
 
