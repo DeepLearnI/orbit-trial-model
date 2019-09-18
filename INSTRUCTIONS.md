@@ -118,16 +118,11 @@ Foundations automatically package up the code and model and wraps it in REST API
 Now, we need to start monitoring how well our model is performing on live data. 
 
 In the real life situation, the following would happen on a monthly basis:
-* Every month, the Operations team will get predictions from your model (i.e., a list of customers the model predicts to be at risk of churn)
+* Every month, the Operations team will get predictions from your model (i.e., getting from your model a list of customers the model predicts to be at risk of churning)
 * Some actions are performed by the Operations team based on the predictions (i.e., actually sending out the special offer to the customers)
 * As the results, customer behaviours are impacted and captured as data (i.e., some customers leave/stay, reflected by their xxx in the database)
 
-We’ve created a simulated production environment to mimic what you would face in real life:
-* Every 1 minute of the trial equates to 1 month in real life
-* Every 1 minute (every month), the simulated environment:
-  * Gets predictions from your model
-  * Actions on the predictions 
-  * Simulates outcome of the actions and updates the database
+We’ve created a simulated production environment to mimic what you would face in real life, with every 1 minute of the trial equates to 1 month in real life.
 
 Now please go to the GUI using the other link that we shared with you (usually in the format of: `<xxxx>-<xxxx>.com/<xxxx>)`. Once you enter the GUI, you will see 1 project in the landing page. Clicking on that leads you into the project. Once you are in the project, you first click the (?) button, located on the top right corner, to go through a quick overview of the GUI.
 
@@ -152,9 +147,17 @@ There is a fourth option. You let Foundations Orbit help you identify & resolve 
 
 Machine learning models in production typically suffer from two types of issues: 
 
-1. **Unexpected changes in production data.** IT and operations changes can lead to unexpected data anomalies capable of adversely affecting model performance. These changes aren’t tracked by traditional IT systems, which means that teams don’t notice them until it’s too late. For example, the team that maintains the databases might not know that your model is dependent on a particular column and decided to make changes to it, such as using a different value to encode something. Small changes like that could proliferate through various data systems and eventually leads to drastic changes by the time the data reach your models
+1. **Unexpected changes in production data.** 
+<details>
+  <summary>Click to see description</summary>
+IT and operations changes can lead to unexpected data anomalies capable of adversely affecting model performance. These changes aren’t tracked by traditional IT systems, which means that teams don’t notice them until it’s too late. For example, the team that maintains the databases might not know that your model is dependent on a particular column and decided to make changes to it, such as using a different value to encode something. Small changes like that could proliferate through various data systems and eventually leads to drastic changes by the time the data reach your models
+</details>
 
-2. **Population or concept drift:** Models are trained using historical data, but changes in customer behaviours and business operations happen over time, changing the underlying relationships between model input and output. In reality, models in production degrade in performance. It is only a matter of time before they become obsolete.
+2. **Population or concept drift:** 
+<details>
+  <summary>Click to see description</summary>
+Models are trained using historical data, but changes in customer behaviours and business operations happen over time, changing the underlying relationships between model input and output. In reality, models in production degrade in performance. It is only a matter of time before they become obsolete.
+</details>
 
 Luckily, with very little changes to our code, you can have the power to address these issues using Orbit.
 
