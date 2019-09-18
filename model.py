@@ -2,6 +2,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, roc_auc_score, confusion_matrix
 from datetime import datetime
 from constants import *
+from user_key import data_key
 from utils import get_dates_in_range
 import numpy as np
 import pandas as pd
@@ -9,7 +10,7 @@ import database as db
 import pickle
 
 
-def train(start_date, end_date, data_key):
+def train(start_date, end_date):
     # get all dates for loading data
     start_date = datetime.strptime(start_date, "%Y-%m-%d")
     end_date = datetime.strptime(end_date, "%Y-%m-%d")
@@ -41,7 +42,7 @@ def train(start_date, end_date, data_key):
     pickle.dump(model, open("fitted_objects/model.pkl", "wb"))
 
 
-def predict(inference_date, data_key):
+def predict(inference_date):
     inference_date = inference_date.split(' ')[0]
     # load inference data
     inference_df = db.load(f'{data_key}-inference-{inference_date}')
@@ -65,7 +66,7 @@ def predict(inference_date, data_key):
     db.save(f'{data_key}-predictions-{inference_date}', probs_df)
 
 
-def eval(eval_date, data_key):
+def eval(eval_date):
     eval_date = eval_date.split(' ')[0]
     # load eval data
     df = db.load(f'{data_key}-labelled-{eval_date}')
