@@ -52,7 +52,7 @@ You can also inspect the dataset on GCP storage bucket: xxxxxx
 
 Now, let’s run the training code to create the model. 
 
-First, open `user_key.py` in the editor by clicking on the file in the directory explorer to the left. Replace `your_key_here` with your `user_key`. This is only to tell our code to only access the dataset that has been allocated specifically for your trial. For example, if the `user_key` we assigned to you is `12.34.56.78`, then line 1 should be:
+First, open `user_key.py` in the editor by clicking on the file in the directory explorer to the left. Replace `your_data_key_here` with your `user_key`. This is only to tell our code to only access the dataset that has been allocated specifically for your trial. For example, if the `user_key` we assigned to you is `12.34.56.78`, then line 1 should be:
 ```python
 data_key = "12.34.56.78"
 ```
