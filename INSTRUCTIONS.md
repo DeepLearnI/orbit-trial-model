@@ -137,10 +137,10 @@ There is a fourth option. You let Foundations Orbit help you identify & resolve 
 Machine learning models in production typically suffer from two types of issues: 
 
 1. **Unexpected changes in production data.** 
-<details>
-  <summary>Click to expand</summary>
-IT and operations changes can lead to unexpected data anomalies capable of adversely affecting model performance. These changes aren’t tracked by traditional IT systems, which means that teams don’t notice them until it’s too late. For example, the team that maintains the databases might not know that your model is dependent on a particular column and decided to make changes to it, such as using a different value to encode something. Small changes like that could proliferate through various data systems and eventually leads to drastic changes by the time the data reach your models
-</details>
+  <details>
+    <summary>Click to expand</summary>
+  IT and operations changes can lead to unexpected data anomalies capable of adversely affecting model performance. These changes aren’t tracked by traditional IT systems, which means that teams don’t notice them until it’s too late. For example, the team that maintains the databases might not know that your model is dependent on a particular column and decided to make changes to it, such as using a different value to encode something. Small changes like that could proliferate through various data systems and eventually leads to drastic changes by the time the data reach your models
+  </details>
 
 2. **Population or concept drift:** 
 <details>
