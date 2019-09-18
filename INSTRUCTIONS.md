@@ -275,5 +275,28 @@ While not part of this trial, the full Orbit platform also provides more sophist
 * Canary release for new models
 
 
-**Congratulations. You’ve completed the trial.** You are welcome to stay in the trial environment and continue to get familiar with the various features. The simulated environment will continue to introduce different issues, which you can address using the tools we showed you.
+## Congratulations. You’ve completed the trial.
+You are welcome to stay in the trial environment and continue to get familiar with the various features. The simulated environment will continue to introduce different issues, which you can address using the tools we showed you.
 
+**To Summarize, in this trial, we’ve shown you several key features of Foundations Orbit:**
+* Easily convert your models and code into consumable micro-services
+* Monitor model performance in production
+* Monitor production data issues and distribution shift
+* Automatically recalibrate your models with new data
+
+**The product also includes several features that are not in the trial, including:**
+* Audit Trail
+* A/B, canary, blue-green deploy, and out-of-time testing 
+* Notification integration with email and Slack
+* Scheduling, automation, and orchestration of various production tasks
+* Custom data monitoring functions
+* Model version control
+
+## What are the next steps? 
+
+1. We would like to hear your what you think about Foundations Orbit!
+Fill out the post-trial survey that we sent you. Tell us what you thought of Foundations Orbit via email or tweet us @Dessa
+
+2. Try this on your own infrastructure and machine learning user cases. There are several options, contact us to learn more
+
+3. Try out our model development platform, Foundations Atlas. This is a tool to give superpower to Data Scientists so they can develop machine learning models better and faster. You download the Community Edition for free at https://www.atlas.dessa.com/
