@@ -225,8 +225,7 @@ Please do the following on the GUI:
 Once you’ve identify which attribute is having critical issue, remember the name of the attribute, and report that to us. **We will fix the issue for you, but only if you correctly report which attribute is having critical issue.** To report and fix the issue, navigate to the IDE, enter the following command in the Terminal
 
 ```bash
-xxxxxxxxxx/?xxx=<attribute_name>
-http://<user_key>:31998/simulator/fix_special_value?column_name=<attribute_name>
+curl http://<user_key>:31998/simulator/fix_special_value?column_name=<attribute_name>
 ```
 Replacing `<attribute_name>` with the name of the attribute you want to report and `<user_key>` with your user_key
 
