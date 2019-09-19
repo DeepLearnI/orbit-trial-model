@@ -29,7 +29,7 @@ Let’s imagine you work at a meal-kit subscription company, called **Hello, Foo
 * Special offer capacity: 10%. This means the company has budget to send special offer to 10% of customers each month. For simplicity, let’s assume:
   * If a customer wants to churn and receives an offer before they actually do, their churn likelihood will significantly reduce
   * If a customer has no intention to churn but receives an offer, they will still get the benefits of the special offer. However, this would be a waste of the retention budget
-
+-------------------------------------------------------------------------------------------------------------------------
 </details>
 
 **Because the company only has limited resources to address retention, it is critical to predict correctly which customers are likely to churn**. 4 months ago, your team decided to develop a **machine learning model to predict which customers are likely to churn so that they can be targeted for special offers.** Now the model is ready to be deployed and all production systems are wired up. You are getting ready to deploy the model and hopefully it will have a positive impact on the business: **lower churn, more revenue** ($300 x number of active customers that month)
@@ -50,7 +50,7 @@ The predict function takes in one argument: the inference data. Given the infere
 
 The eval function takes in one argument: the evaluation date. Given evaluation key, the function pulls from database the data it needs to compute metrics as of the evaluation date, computes the metrics, and use Foundations Orbit’s track_production_metrics to log and store the metrics.
 
-You can also inspect the dataset on GCP storage bucket: xxxxxx
+-------------------------------------------------------------------------------------------------------------------------
 </details>
 
 Now, let’s run the training code to create the model. 
@@ -107,9 +107,9 @@ entrypoints:
     function: 'eval'
 ```
 
-Next, In the terminal, please enter this command then press ‘Enter’ key. You can replace `model_v1` with any name you want to give this model package.
+Next, In the terminal, please enter this command then press ‘Enter’ key. You can replace `model-v1` with any name you want to give this model package.
 ```bash
-foundations orbit serve start --project_name=orbit-trial --model_name=model_v1 --project_directory=./ --env=scheduler
+foundations orbit serve start --project_name=orbit-trial --model_name=model-v1 --project_directory=./ --env=scheduler
 ```
 Foundations automatically package up the code and model and wraps it in REST API. Requests can be made to the entrypoints specified by the `foundations_package_manifest.yaml` file.
 
@@ -202,7 +202,7 @@ entrypoints:
 
 Then run this in terminal:
 ```bash
-foundations orbit serve start --project_name=orbit-trial --model_name=model_v2 --project_directory=./ --env=scheduler
+foundations orbit serve start --project_name=orbit-trial --model_name=model-v2 --project_directory=./ --env=scheduler
 ```
 
 <details>
@@ -279,7 +279,6 @@ While not part of this trial, the full Orbit platform also provides more sophist
 * Canary release for new models
 
 ## Congratulations. You’ve completed the trial.
-You are welcome to stay in the trial environment and continue to get familiar with the various features. The simulated environment will continue to introduce different issues, which you can address using the tools we showed you.
 
 **To Summarize, in this trial, we’ve shown you several key features of Foundations Orbit:**
 * Easily convert your models and code into consumable micro-services
