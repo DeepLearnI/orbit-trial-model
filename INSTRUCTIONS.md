@@ -19,7 +19,8 @@ Let’s imagine you work at a meal-kit subscription company, called **Hello, Foo
 
 **You are in charge of this initiative! Good luck!**
 
-Here are some facts about the business:
+<details>
+  <summary>  Here are some facts about the business (don't have to memorize): </summary>
 * Revenue per customer: $300 per month
 * Number of customers (as of the start of this trial): 5000
 * Monthly growth rate: 14% 
@@ -27,21 +28,21 @@ Here are some facts about the business:
 * Special offer capacity: 10%. This means the company has budget to send special offer to 10% of customers each month. For simplicity, let’s assume:
   * If a customer wants to churn and receives an offer before they actually do, their churn likelihood will significantly reduce
   * If a customer has no intention to churn but receives an offer, they will still get the benefits of the special offer. However, this would be a waste of the retention budget
+ </details>
 
 **Because the company only has limited resources to address retention, it is critical to predict correctly which customers are likely to churn**. 4 months ago, your team decided to develop a **machine learning model to predict which customers are likely to churn so that they can be targeted for special offers.** Now the model is ready to be deployed and all production systems are wired up. You are getting ready to deploy the model and hopefully it will have a positive impact on the business: **lower churn, more revenue** ($300 x number of active customers that month)
 
 ## Step 2 of 9: Introduction to the sample solution code
 
-The code written by **Hello Food**’s Data Scientists can be viewed on this editor. You can navigate to different files using the directory explorer to the left. At a high level, the `model.py` file includes some code to train the model, some code to use the model for inference, some code to evaluate the performance of the model.  
+First, let's open the code editor on a browser using the first link that we sent you.
+
+The code written by **Hello Food**’s Data Scientists can be viewed on this editor. You can navigate to different files using the directory explorer to the left. At a high level, the `model.py` file includes some code to train the model, some code to use the model for inference, some code to evaluate the performance of the model. There are three functions in `model.py`: `train`, `predict`, and `eval`. **There’s no Foundations Orbit feature in them right now.**
+
 
 <details>
   <summary>Optional reading</summary>
 
-In the directory explorer, click and open the `model.py` file in the editor. 
-
-There are three functions in `model.py`: train, predict, and eval. There’s no Foundations Orbit feature in them right now.
-
-The train function takes in two arguments: start and end dates your training period. Given these arguments, the train function fetches the data, processes them, trains a simple random forest model, and save the model to a specified location. 
+The train function takes in two arguments: start and end dates of your training period. Given these arguments, the train function fetches the data, processes them, trains a simple random forest model, and saves the model to a specified location. 
 
 The predict function takes in one argument: the inference data. Given the inference date, the function pulls from database the data it needs to run prediction for the specified date, then saves the predictions back to the database.
 
@@ -52,7 +53,7 @@ You can also inspect the dataset on GCP storage bucket: xxxxxx
 
 Now, let’s run the training code to create the model. 
 
-First, open `user_key.py` in the editor by clicking on the file in the directory explorer to the left. Replace `your_data_key_here` with your `user_key`. This is only to tell our code to only access the dataset that has been allocated specifically for your trial. For example, if the `user_key` we assigned to you is `12.34.56.78`, then line 1 should be:
+First, open `user_key.py` in the editor by clicking on the file in the directory explorer to the left. Replace `your_data_key_here` with your `user_key`. This is to tell our code to only access the dataset that has been allocated specifically for your trial. For example, if the `user_key` we assigned to you is `12.34.56.78`, then line 1 should be:
 ```python
 data_key = "12.34.56.78"
 ```
