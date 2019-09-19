@@ -21,6 +21,7 @@ Let’s imagine you work at a meal-kit subscription company, called **Hello, Foo
 
 <details>
   <summary>  Here are some facts about the business (don't have to memorize): </summary>
+
 * Revenue per customer: $300 per month
 * Number of customers (as of the start of this trial): 5000
 * Monthly growth rate: 14% 
@@ -28,7 +29,8 @@ Let’s imagine you work at a meal-kit subscription company, called **Hello, Foo
 * Special offer capacity: 10%. This means the company has budget to send special offer to 10% of customers each month. For simplicity, let’s assume:
   * If a customer wants to churn and receives an offer before they actually do, their churn likelihood will significantly reduce
   * If a customer has no intention to churn but receives an offer, they will still get the benefits of the special offer. However, this would be a waste of the retention budget
- </details>
+
+</details>
 
 **Because the company only has limited resources to address retention, it is critical to predict correctly which customers are likely to churn**. 4 months ago, your team decided to develop a **machine learning model to predict which customers are likely to churn so that they can be targeted for special offers.** Now the model is ready to be deployed and all production systems are wired up. You are getting ready to deploy the model and hopefully it will have a positive impact on the business: **lower churn, more revenue** ($300 x number of active customers that month)
 
