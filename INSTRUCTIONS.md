@@ -205,18 +205,19 @@ entrypoints:
     module: 'model'
     function: 'train'
 ```
+
+<details>
+  <summary>Optional reading</summary>
+This is adding a recalibration endpoint for the model package. As we serve this model, Foundations will create a new microservice for this model with a recalibration endpoint that can be hit via API to trigger recalibration. As a user, you can define what API arguments the model microservice is expecting to successfully kickoff a recalibration job. In this example, the `train` function expects two arguments, start and end dates of the training period, and takes care of training a new model given these arguments.
+
+-------------------------------------------------------------------------------------------------------------------------
+</details>
+
 ### Let's deploy a new model with these fixes
 Then run this in terminal:
 ```bash
 foundations orbit serve start --project_name=orbit-trial --model_name=model-v2 --project_directory=./ --env=scheduler
 ```
-
-<details>
-  <summary>Optional reading</summary>
-This is adding a recalibration endpoint for the model package. As we serve this model, Foundations creates a new microservice for this model with a recalibration endpoint that can be hit via API to trigger recalibration
-
--------------------------------------------------------------------------------------------------------------------------
-</details>
 
 Now you are ready to head back to the GUI. Once you are back in the GUI, you will see the new model package that you just deployed. Please do the following on the GUI:
 * Navigate to **Model Management** tab using the side bar
