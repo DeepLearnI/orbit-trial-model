@@ -165,6 +165,7 @@ Models are trained using historical data, but changes in customer behaviours and
 
 Luckily, with very little changes to our code, you can have the power to address these issues using Orbit.
 
+### To address the first type of issue
 Let’s start by adding the following line of code to the `model.py` after line 10
 
 ```python
@@ -190,6 +191,7 @@ In terminal, run
 python train_driver.py
 ```
 
+### To address the second type of issue
 Edit your `foundations_package_manifest.yaml` to the following:
 ```yaml
 entrypoints:
@@ -203,7 +205,7 @@ entrypoints:
     module: 'model'
     function: 'train'
 ```
-
+### Let's deploy a new model with these fixes
 Then run this in terminal:
 ```bash
 foundations orbit serve start --project_name=orbit-trial --model_name=model-v2 --project_directory=./ --env=scheduler
