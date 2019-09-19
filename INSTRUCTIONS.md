@@ -71,7 +71,7 @@ Once it completes, you can see in `fitted_objects/` folder that a new model was 
 
 ## Step 3 of 9: Monitoring model performance using Orbit
 
-Now, we are ready to deploy the model into production. However, one thing is still missing. As soon as we deploy this model into the simulated production environment, it will start being consumed by the production environment and having impacts on the Hello, Food’s business. **How can you track the performance metrics of your model over time, and be able to monitor them easily?**
+Now, we are ready to deploy the model into production. Before we actually do that (in the next section), one thing is still missing. As soon as we deploy this model into the simulated production environment, it will start being consumed by the production environment and having impacts on the Hello, Food’s business. **How can you track the performance metrics of your model over time, and be able to monitor them easily?**
 
 With Orbit, this is as easy as adding a couple lines of code. Now, let’s add the following line of code to the `model.py` after line 9
 
