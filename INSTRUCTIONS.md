@@ -55,12 +55,13 @@ You can also inspect the dataset on GCP storage bucket: xxxxxx
 
 Now, let’s run the training code to create the model. 
 
-First, open `user_key.py` in the editor by clicking on the file in the directory explorer to the left. Replace `your_data_key_here` with your `user_key`. This is to tell our code to only access the dataset that has been allocated specifically for your trial. For example, if the `user_key` we assigned to you is `12.34.56.78`, then line 1 should be:
+First, open `user_key.py` in the editor by clicking on the file in the directory explorer to the left. Replace `your_data_key_here` with your `user_key`. For example, if the `user_key` we assigned to you is `12.34.56.78`, then line 1 should be:
 ```python
 data_key = "12.34.56.78"
 ```
+_Note: the step above is only for the trial and has nothing to do with Orbit. This is to tell our code to only access the dataset that has been allocated specifically for you in this trial._
 
-Then, please navigate to the terminal window by clicking **Terminal** at the top bar and **New Terminal Window**. Enter the following command, then press the ‘Enter’ key:
+Next, navigate to the terminal window by clicking **Terminal** at the top bar and **New Terminal Window**. Enter the following command, then press the ‘Enter’ key:
 ```bash
 python train_driver.py
 ```
