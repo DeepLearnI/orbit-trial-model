@@ -151,12 +151,14 @@ Machine learning models in production typically suffer from two types of issues:
   <details>
     <summary>Click to expand</summary>
   IT and operations changes can lead to unexpected data anomalies capable of adversely affecting model performance. These changes aren’t tracked by traditional IT systems, which means that teams don’t notice them until it’s too late. For example, the team that maintains the databases might not know that your model is dependent on a particular column and decided to make changes to it, such as using a different value to encode something. Small changes like that could proliferate through various data systems and eventually leads to drastic changes by the time the data reach your models
+-------------------------------------------------------------------------------------------------------------------------
   </details>
 
 2. **Population or concept drift:** 
 <details>
   <summary>Click to expand</summary>
 Models are trained using historical data, but changes in customer behaviours and business operations happen over time, changing the underlying relationships between model input and output. In reality, models in production degrade in performance. It is only a matter of time before they become obsolete.
+-------------------------------------------------------------------------------------------------------------------------
 </details>
 
 Luckily, with very little changes to our code, you can have the power to address these issues using Orbit.
@@ -208,6 +210,7 @@ foundations orbit serve start --project_name=orbit-trial --model_name=model-v2 -
 <details>
   <summary>Optional reading</summary>
 This is adding a recalibration endpoint for the model package. As we serve this model, Foundations creates a new microservice for this model with a recalibration endpoint that can be hit via API to trigger recalibration
+-------------------------------------------------------------------------------------------------------------------------
 </details>
 
 Now you are ready to head back to the GUI. Once you are back in the GUI, you will see the new model package that you just deployed. Please do the following on the GUI:
@@ -239,7 +242,7 @@ While it is not part of this trial, the full Orbit platform also offers email an
 
 ## Step 9 of 9: Address population and concept drift with recalibration
 
-_Hint: you know that it is happening if there’s a gradual performance decline, while there isn’t any glaring issues with the dataset, except high population shift index for some attributes._
+_Hint: you know that it is happening if there’s a gradual performance decline, while there isn’t any glaring issues with the dataset._
 
 Please do the following on the GUI:
 * Navigate to **Model Management** tab using the side bar
@@ -263,7 +266,7 @@ For example, if the latest date in the simulated production environment, which y
   | -----------|-------------|
   | start_date | 2020-07-01  |
   | end_date   | 2020-10-01  |
-
+-------------------------------------------------------------------------------------------------------------------------
 </details>
 
 * Click **Recalibrate** button
