@@ -182,7 +182,7 @@ Add these two lines of code to the `predict(...)` function in `model.py`. This s
 ```python
     # insert DataContract validation code here #
     dc = DataContract.load(".", "my_contract")
-    dc.validate(x_train, inference_date)
+    dc.validate(x_inference, inference_date)
 ```
 
 In terminal, run 

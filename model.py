@@ -46,19 +46,19 @@ def predict(inference_date):
     # load inference data
     inference_df = db.load(f'{data_key}-inference-{inference_date}')
     # drop non-feature columns
-    x_train = inference_df.drop(['cust_id', 'date'], axis=1)
+    x_inference = inference_df.drop(['cust_id', 'date'], axis=1)
 
     # insert DataContract validation code here #
 
     ############################################
 
-    x_train = x_train.fillna(0)
+    x_inference = x_inference.fillna(0)
 
     # load model
     model = pickle.load(open("fitted_objects/model.pkl", "rb"))
 
     # run inference
-    probs = model.predict_proba(x_train)[:, 1]
+    probs = model.predict_proba(x_inference)[:, 1]
     probs_df = pd.DataFrame(probs, columns=["predicted_churn_probability"])
 
     # save predictions to data bucket (not necessary if API is exposed and returns preds)
