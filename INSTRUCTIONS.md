@@ -326,8 +326,6 @@ For example, if the latest date in the simulated production environment, which y
 * Click **Recalibrate** button
 * Under **Model Registry** click the **Default** checkbox for the newest model package (named "model-v3" if you followed our instruction)
 
-This is adding a recalibration endpoint for the model package. As we serve this model, Foundations creates a new microservice for this model with a recalibration endpoint that can be hit via API to trigger recalibration
-
 While not part of this trial, the full Orbit platform also provides more sophisticated control on how the model can be recalibrated, existing features include:
 * Scheduled recalibration
 * Control how much old vs new data to include
