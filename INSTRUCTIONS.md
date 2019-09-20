@@ -94,9 +94,9 @@ Then add the following code to the `eval(...)` function in `model.py` around lin
 ```
 
 <details>
-  <summary>What is it trying to do? (Optional reading, click to expand)</summary>
+  <summary>What does this orbit feature do? (Optional reading)</summary>
 
-Foundations allows you to specify custom metric calculation code and tracks the resulting metrics. As we will show later, after we deploy this model, Orbit will package the code and automate the execution of these metric calculation function and the tracking of the resulting metrics, which you can visualize in the Orbit GUI.
+Orbit allows you to specify custom metric calculation code and tracks the resulting metrics. As we will show later, after we deploy this model, Orbit will package the code and automate the execution of these metric calculation function and the tracking of the resulting metrics, which you can visualize in the Orbit GUI.
 
 In this example, we are monitoring 4 metrics. The first two are typical mathematical metrics for classification problems and the last two are business metrics for this initiative
 
@@ -126,7 +126,18 @@ Next, In the terminal, please enter this command then press ‘Enter’ key. You
 ```bash
 foundations orbit serve start --project_name=orbit-trial --model_name=model-v1 --project_directory=./ --env=scheduler
 ```
-Foundations automatically package up the code and model and wraps it in REST API. Requests can be made to the entrypoints specified by the `foundations_package_manifest.yaml` file.
+
+<details>
+  <summary>What does this orbit feature do? (Optional reading)</summary>
+
+Orbit automatically package up the code and model into what we call a "model package", which is a microservice that can be accessed by any IT systems using REST API. The entrypoints specified in the `foundations_package_manifest.yaml` file will become API endpoints that can receive requests and response with output from/to IT systems. 
+
+Why is this important?
+* The packaging aspect of this feature ensures reproducibility of models
+* The serving aspect of this feature essentially makes it easy to turn your model into a service that can communicate with modern technology systems via API, making it easier to put models in production
+
+-------------------------------------------------------------------------------------------------------------------------
+</details>
 
 **Congratulations, you’ve deployed your churn model!**
 
@@ -169,7 +180,7 @@ There is a fourth option. You let Foundations Orbit help you identify & resolve 
 
 Machine learning models in production typically suffer from two types of issues: 
 
-1. **Unexpected changes in production data.** 
+1. **Unexpected changes in production data** 
   <details>
     <summary>Click to expand</summary>
   IT and operations changes can lead to unexpected data anomalies capable of adversely affecting model performance. These changes aren’t tracked by traditional IT systems, which means that teams don’t notice them until it’s too late. For example, the team that maintains the databases might not know that your model is dependent on a particular column and decided to make changes to it, such as using a different value to encode something. Small changes like that could proliferate through various data systems and eventually leads to drastic changes by the time the data reach your models
@@ -177,7 +188,7 @@ Machine learning models in production typically suffer from two types of issues:
 -------------------------------------------------------------------------------------------------------------------------
   </details>
 
-2. **Population or concept drift:** 
+2. **Population or concept drift** 
 <details>
   <summary>Click to expand</summary>
 Models are trained using historical data, but changes in customer behaviours and business operations happen over time, changing the underlying relationships between model input and output. In reality, models in production degrade in performance. It is only a matter of time before they become obsolete.
@@ -213,6 +224,19 @@ In terminal, run
 python train_driver.py
 ```
 
+<details>
+  <summary>What does this orbit feature do? (click to expand)</summary>
+
+Orbit introduces the concept of "Data Contract". It has two components: 
+1. The creation of a data contract from a reference dataset, which automatically summarizes the characteristics of a dataset
+2. The application of a data contract on another dataset, using its `validate` method. When this is executed, Orbit will automatically runs QA tests on the dataset against expected characteristics stored in a data contract
+
+In our example, we create a data contract called "my_contract" from the dataset that we used to train the model. Then we apply this data contract on the production dataset that the predict function uses to generate predictions.
+
+In practice, you can create multiple Data Contracts and validation points at multiple points of your machine learning pipeline, quality-assuring both input and output of your model predictions.
+
+-------------------------------------------------------------------------------------------------------------------------
+
 ### To address the second type of issue
 Edit your `foundations_package_manifest.yaml` to the following:
 ```yaml
@@ -229,11 +253,11 @@ entrypoints:
 ```
 
 <details>
-  <summary>Optional reading</summary>
+  <summary>What does this orbit feature do? (click to expand)</summary>
+
 This is adding a recalibration endpoint for the model package. As we serve this model, Foundations will create a new microservice for this model with a recalibration endpoint that can be hit via API to trigger recalibration. As a user, you can define what API arguments the model microservice is expecting to successfully kickoff a recalibration job. In this example, the `train` function expects two arguments, start and end dates of the training period, and takes care of training a new model given these arguments.
 
 -------------------------------------------------------------------------------------------------------------------------
-</details>
 
 ### Let's deploy a new model with these fixes
 Then run this in terminal:
