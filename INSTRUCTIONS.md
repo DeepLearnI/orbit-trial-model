@@ -98,6 +98,8 @@ Then add the following code to the `eval(...)` function in `model.py` around lin
 
 Foundations allows you to specify custom metric calculation code and tracks the resulting metrics. As we will show later, after we deploy this model, Orbit will package the code and automate the execution of these metric calculation function and the tracking of the resulting metrics, which you can visualize in the Orbit GUI.
 
+In this example, we are monitoring 4 metrics. The first two are typical mathematical metrics for classification problems and the last two are business metrics for this initiative
+
 -------------------------------------------------------------------------------------------------------------------------
 </details>
 
@@ -139,9 +141,16 @@ In the real life situation, the following would happen on a monthly basis:
 
 We’ve created a simulated production environment to mimic what you would face in real life, with every 1 minute of the trial equates to 1 month in real life.
 
-Now please go to the GUI using the other link that we shared with you. Once you enter the GUI, you will see 1 project in the landing page. Clicking on that leads you into the project. Once you are in the project, you first click the (?) button, located on the top right corner, to go through a quick overview of the GUI.
+Now please go to the GUI using the other link that we shared with you. Once you enter the GUI, you will see 1 project in the landing page. Please do the following
+* Click on the "orbit-trial" project
+* Once you are in the project, navigate to **Model Management** tab using the side bar
+* In **Model Management**, you will see information of the model that you just deployed
+* Navigate to **Model Evaluation** tab using the side bar
+* You can see the four metrics that we call `track_production_metrics` function with earlier are being tracked
 
-After that, **keep an eye on the model performance over time, located in the Model Evaluation tab. We recommend that you come back here in a couple of minutes and go through the rest of this tutorial.**
+Again, 1 minute of trial simulates 1 month in real life. **keep an eye on the model performance in the Model Evaluation tab. We recommend that you come back here in a couple of minutes and go through the rest of this tutorial.**
+
+At anytime, you can click the (?) button located on the top right corner to go through a quick overview of the GUI.
 
 ## Step 6 of 9: The big problem
 
