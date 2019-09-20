@@ -2,6 +2,10 @@ from dateutil.relativedelta import relativedelta
 
 
 def get_dates_in_range(start_date, end_date):
+    """
+    returns a list datetime objects of the first day of each month between and including
+    statt_date and end_date
+    """
     assert end_date >= start_date
     assert end_date.day == start_date.day
     dates = []

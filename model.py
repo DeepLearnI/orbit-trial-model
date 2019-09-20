@@ -9,16 +9,26 @@ import pandas as pd
 import database as db
 import pickle
 
+
 def train(start_date, end_date):
+    """
+    Loads data from the month of start_date to the month of end_date (inclusive),
+    trains a random forest classifier on that data, and saves the fitted model locally.
+
+    :param start_date: datetime object, first day of first month of training data
+    :param end_date: datetime object, first day of last month of training data
+    """
+
     # get all dates for loading data
     start_date = datetime.strptime(start_date, "%Y-%m-%d")
     end_date = datetime.strptime(end_date, "%Y-%m-%d")
     load_dates = get_dates_in_range(start_date, end_date)
 
-    # load train data
+    # load all training data
     train_dfs = []
     for date in load_dates:
         date_without_time = date.date()
+        # load one month of train data from a GCP bucket as a pandas dataframe
         df = db.load(f'{data_key}-labelled-{date_without_time}')
         train_dfs.append(df)
     train_df = pd.concat(train_dfs, axis=0)
@@ -31,7 +41,7 @@ def train(start_date, end_date):
 
     ##########################################
 
-    x_train = x_train.fillna(0)
+    x_train = x_train.fillna(0)  # ensure the model can still train if NaN values are present
 
     # train model
     model = RandomForestClassifier()
@@ -42,8 +52,15 @@ def train(start_date, end_date):
 
 
 def predict(inference_date):
+    """
+    Loads one month of inference data from a GCP bucket and runs inference using
+    the locally saved model. The predictions are uploaded to GCP.
+
+    :param inference_date: datetime object, the first day of the month to perform inference on
+    """
+
     inference_date = inference_date.split(' ')[0]
-    # load inference data
+    # load inference data from a GCP bucket as a pandas dataframe
     inference_df = db.load(f'{data_key}-inference-{inference_date}')
     # drop non-feature columns
     x_train = inference_df.drop(['cust_id', 'date'], axis=1)
@@ -54,22 +71,30 @@ def predict(inference_date):
 
     x_train = x_train.fillna(0)
 
-    # load model
+    # load model from local directory
     model = pickle.load(open("fitted_objects/model.pkl", "rb"))
 
-    # run inference
+    # run inference, and create a dataframe to store the predicted probabilities
     probs = model.predict_proba(x_train)[:, 1]
     probs_df = pd.DataFrame(probs, columns=["predicted_churn_probability"])
 
-    # save predictions to data bucket (not necessary if API is exposed and returns preds)
+    # save predictions to a GCP bucket
     db.save(f'{data_key}-predictions-{inference_date}', probs_df)
 
 
 def eval(eval_date):
+    """
+    Loads one month of labelled data from a GCP bucket and calculates model performance
+    on that month.
+
+    :param eval_date: datetime object, the first day of the month to perform evaluation on
+    """
+
     eval_date = eval_date.split(' ')[0]
-    # load eval data
+    # load eval data from a GCP bucket as a pandas dataframe
     df = db.load(f'{data_key}-labelled-{eval_date}')
-    # log accuracy and roc_auc
+
+    # calculate accuracy, roc_auc, and confusion matrix
     targets = df["churn"]
     probs = df["predicted_churn_probability"]
     preds = [1 if prob > 0.5 else 0 for prob in probs]
@@ -77,14 +102,10 @@ def eval(eval_date):
     roc_auc = roc_auc_score(targets, probs)
     confusion_mat = confusion_matrix(targets, preds)
 
-    # revenue, costs, and profits calc
-    n_promos = np.sum(preds)
-    n_active_custs = len(df[df.churn == 0])
+    # calculate revenue
+    n_active_custs = len(df[df.churn == 0])  # number of active customers in the evaluation month
     revenue = revenue_per_cust * n_active_custs
 
     # insert foundations metric tracking here #
 
     ###########################################
-
-    return preds, confusion_mat, accuracy, roc_auc, n_promos, n_active_custs, revenue
-
