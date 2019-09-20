@@ -236,6 +236,7 @@ In our example, we create a data contract called "my_contract" from the dataset 
 In practice, you can create multiple Data Contracts and validation points at multiple points of your machine learning pipeline, quality-assuring both input and output of your model predictions.
 
 -------------------------------------------------------------------------------------------------------------------------
+</details>
 
 ### To address the second type of issue
 Edit your `foundations_package_manifest.yaml` to the following:
@@ -258,6 +259,7 @@ entrypoints:
 This is adding a recalibration endpoint for the model package. As we serve this model, Foundations will create a new microservice for this model with a recalibration endpoint that can be hit via API to trigger recalibration. As a user, you can define what API arguments the model microservice is expecting to successfully kickoff a recalibration job. In this example, the `train` function expects two arguments, start and end dates of the training period, and takes care of training a new model given these arguments.
 
 -------------------------------------------------------------------------------------------------------------------------
+</details>
 
 ### Let's deploy a new model with these fixes
 Then run this in terminal:
