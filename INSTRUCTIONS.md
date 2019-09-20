@@ -122,7 +122,7 @@ entrypoints:
     function: 'eval'
 ```
 
-Next, In the terminal, please enter this command then press ‘Enter’ key. You can replace `model-v1` with any name you want to give this model package.
+Next, In the terminal, enter this command then press ‘Enter’ key:
 ```bash
 foundations orbit serve start --project_name=orbit-trial --model_name=model-v1 --project_directory=./ --env=scheduler
 ```
