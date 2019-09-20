@@ -109,3 +109,5 @@ def eval(eval_date):
     # insert foundations metric tracking here #
 
     ###########################################
+
+    return accuracy, roc_auc, n_active_custs, revenue
