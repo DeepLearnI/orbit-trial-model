@@ -100,7 +100,6 @@ def eval(eval_date):
     preds = [1 if prob > 0.5 else 0 for prob in probs]
     accuracy = accuracy_score(targets, preds)
     roc_auc = roc_auc_score(targets, probs)
-    confusion_mat = confusion_matrix(targets, preds)
 
     # calculate revenue
     n_active_custs = len(df[df.churn == 0])  # number of active customers in the evaluation month
