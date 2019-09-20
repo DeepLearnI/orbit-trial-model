@@ -11,6 +11,11 @@ We’re providing you with a fully-managed environment so you can focus on under
 * A simulated production environment
 * Free cloud compute
 
+To complete this trial, you will need 3 things that you should have received from us:
+* Your user_key
+* Link to the online code editor
+* Link to the Foundations Orbit GUI
+
 ## Step 1 of 9: Introduction to the problem
 
 Let’s imagine you work at a meal-kit subscription company, called **Hello, Food**. The business model is to prepare & deliver the ingredients for meals every week to subscribed customers for them to cook themselves. 
@@ -20,7 +25,7 @@ Let’s imagine you work at a meal-kit subscription company, called **Hello, Foo
 **You are in charge of this initiative! Good luck!**
 
 <details>
-  <summary>  Here are some facts about the business (don't have to memorize): </summary>
+  <summary>  Here are some facts about the business (click to expand, no need to memorize): </summary>
 
 * Revenue per customer: $300 per month
 * Number of customers (as of the start of this trial): 5000
@@ -32,14 +37,13 @@ Let’s imagine you work at a meal-kit subscription company, called **Hello, Foo
 -------------------------------------------------------------------------------------------------------------------------
 </details>
 
-**Because the company only has limited resources to address retention, it is critical to predict correctly which customers are likely to churn**. 4 months ago, your team decided to develop a **machine learning model to predict which customers are likely to churn so that they can be targeted for special offers.** Now the model is ready to be deployed and all production systems are wired up. You are getting ready to deploy the model and hopefully it will have a positive impact on the business: **lower churn, more revenue** ($300 x number of active customers that month)
+**Because the company only has limited resources to address retention, it is critical to predict correctly which customers are likely to churn**. 4 months ago, your team decided to develop a **machine learning model to predict which customers are likely to churn based on their recent behaviour so that they can be targeted for special offers.** Now the model is ready to be deployed and all production systems are wired up. You are getting ready to deploy the model and hopefully it will have a positive impact on the business: **lower churn, more revenue month over month** ($300 x number of active customers that month)
 
 ## Step 2 of 9: Introduction to the sample solution code
 
-First, let's open the code editor on a browser using the first link that we sent you.
+First, let's open the code editor on a browser using the link that we sent you. 
 
-The code written by **Hello Food**’s Data Scientists can be viewed on this editor. You can navigate to different files using the directory explorer to the left. At a high level, the `model.py` file includes some code to train the model, some code to use the model for inference, some code to evaluate the performance of the model. There are three functions in `model.py`: `train`, `predict`, and `eval`. **There’s no Foundations Orbit feature in them right now.**
-
+The code written by **Hello Food**’s Data Scientists can be viewed on this editor. You can navigate to different files using the directory explorer to the left. At a high level, the `model.py` file includes some code to train the model, some code to use the model for inference, and some code to calculate the performance of the model. There are three functions in `model.py`: `train`, `predict`, and `eval`. **There’s no Foundations Orbit feature in them right now.**
 
 <details>
   <summary>Optional reading</summary>
@@ -59,7 +63,7 @@ First, open `user_key.py` in the editor by clicking on the file in the directory
 ```python
 data_key = "12.34.56.78"
 ```
-_Note: the step above is only for the trial and has nothing to do with Orbit. This is to tell our code to only access the dataset that has been allocated specifically for you in this trial._
+_Note: the step above is only for the trial and has nothing to do with Orbit. This is to tell this trial to only access the dataset that has been allocated specifically for you._
 
 Next, navigate to the terminal window by clicking **Terminal** at the top bar and **New Terminal Window**. Enter the following command, then press the ‘Enter’ key:
 ```bash
@@ -71,7 +75,7 @@ Once it completes, you can see in `fitted_objects/` folder that a new model was 
 
 ## Step 3 of 9: Monitoring model performance using Orbit
 
-Now, we are ready to deploy the model into production. Before we actually do that (in the next section), one thing is still missing. As soon as we deploy this model into the simulated production environment, it will start being consumed by the production environment and having impacts on the Hello, Food’s business. **How can you track the performance metrics of your model over time, and be able to monitor them easily?**
+Now, we are ready to deploy the model into production. Before we actually do that in the next section, one thing is still missing. As soon as we deploy this model into the simulated production environment, it will start being consumed by the production environment and having impacts on the business. **How can you track the performance metrics of your model over time, and be able to monitor them easily?**
 
 With Orbit, this is as easy as adding a couple lines of code. Now, let’s add the following line of code to the `model.py` after line 9
 
@@ -88,6 +92,15 @@ Then add the following code to the `eval(...)` function in `model.py` around lin
     foundations.track_production_metrics("revenue", {str(eval_date): revenue})
     foundations.track_production_metrics("n_active_custs", {str(eval_date): n_active_custs})
 ```
+
+<details>
+  <summary>What is it trying to do? (Optional reading, click to expand)</summary>
+
+Foundations allows you to specify custom metric calculation code and tracks the resulting metrics. As we will show later, after we deploy this model, Orbit will package the code and automate the execution of these metric calculation function and the tracking of the resulting metrics, which you can visualize in the Orbit GUI.
+
+-------------------------------------------------------------------------------------------------------------------------
+</details>
+
 
 ## Step 4 of 9: Deploying the model
 
