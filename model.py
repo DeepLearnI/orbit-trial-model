@@ -30,7 +30,10 @@ def train(start_date, end_date):
         date_without_time = date.date()
         # load one month of train data from a GCP bucket as a pandas dataframe
         df = db.load(f'{data_key}-labelled-{date_without_time}')
-        train_dfs.append(df)
+        # don't include customers who got promos in the training data
+        train_df = df[df['promo'] == 0]
+        train_df = train_df.drop(['promo'], axis=1)
+        train_dfs.append(train_df)
     train_df = pd.concat(train_dfs, axis=0)
 
     # split features from target
