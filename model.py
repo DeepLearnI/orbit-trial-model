@@ -98,8 +98,9 @@ def eval(eval_date):
     df = db.load(f'{data_key}-labelled-{eval_date}')
 
     # calculate accuracy, roc_auc, and confusion matrix
-    targets = df["churn"]
-    probs = df["predicted_churn_probability"]
+    no_promo_df = df[df['promo'] == 0]
+    targets = no_promo_df["churn"]
+    probs = no_promo_df["predicted_churn_probability"]
     preds = [1 if prob > 0.5 else 0 for prob in probs]
     accuracy = accuracy_score(targets, preds)
     roc_auc = roc_auc_score(targets, probs)
